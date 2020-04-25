@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8730AE0724549B1C00A47A9D /* JournalEntryChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8730AE0524549AF500A47A9D /* JournalEntryChecker.swift */; };
+		8733912F244E2A7000434489 /* JournalEntryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733912E244E2A7000434489 /* JournalEntryTextField.swift */; };
 		8739FBEC243CF7ED002457F3 /* GoalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739FBEB243CF7ED002457F3 /* GoalProgressView.swift */; };
 		87467AA3243EE1DF00B03ED4 /* Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87467AA2243EE1DF00B03ED4 /* Extenstions.swift */; };
 		874CFAD524464283003A273D /* SettingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874CFAD424464283003A273D /* SettingRow.swift */; };
@@ -19,8 +21,9 @@
 		876C26D32438EC84006DD63B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 876C26D12438EC84006DD63B /* LaunchScreen.storyboard */; };
 		876C26DE2438EC84006DD63B /* ProteinJournalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C26DD2438EC84006DD63B /* ProteinJournalTests.swift */; };
 		876C26E92438EC84006DD63B /* ProteinJournalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C26E82438EC84006DD63B /* ProteinJournalUITests.swift */; };
+		87B0040B244E1D3900956245 /* ProteinEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B0040A244E1D3900956245 /* ProteinEntry.swift */; };
 		87E16DF12448B52F00DFF2A3 /* PersonalizedViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E16DF02448B52F00DFF2A3 /* PersonalizedViews.swift */; };
-		87E16DF32448BAFA00DFF2A3 /* EntryVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E16DF22448BAFA00DFF2A3 /* EntryVIew.swift */; };
+		87E16DF32448BAFA00DFF2A3 /* ManualEntryVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E16DF22448BAFA00DFF2A3 /* ManualEntryVIew.swift */; };
 		87E16DF52448D1D700DFF2A3 /* AddEntryMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E16DF42448D1D700DFF2A3 /* AddEntryMenu.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8730AE0524549AF500A47A9D /* JournalEntryChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryChecker.swift; sourceTree = "<group>"; };
+		8733912E244E2A7000434489 /* JournalEntryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryTextField.swift; sourceTree = "<group>"; };
 		8739FBEB243CF7ED002457F3 /* GoalProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalProgressView.swift; sourceTree = "<group>"; };
 		87467AA2243EE1DF00B03ED4 /* Extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extenstions.swift; sourceTree = "<group>"; };
 		874CFAD424464283003A273D /* SettingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRow.swift; sourceTree = "<group>"; };
@@ -60,8 +65,9 @@
 		876C26E42438EC84006DD63B /* ProteinJournalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProteinJournalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		876C26E82438EC84006DD63B /* ProteinJournalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinJournalUITests.swift; sourceTree = "<group>"; };
 		876C26EA2438EC84006DD63B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		87B0040A244E1D3900956245 /* ProteinEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinEntry.swift; sourceTree = "<group>"; };
 		87E16DF02448B52F00DFF2A3 /* PersonalizedViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizedViews.swift; sourceTree = "<group>"; };
-		87E16DF22448BAFA00DFF2A3 /* EntryVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryVIew.swift; sourceTree = "<group>"; };
+		87E16DF22448BAFA00DFF2A3 /* ManualEntryVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualEntryVIew.swift; sourceTree = "<group>"; };
 		87E16DF42448D1D700DFF2A3 /* AddEntryMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEntryMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,13 +96,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		87339130244E2A7C00434489 /* JournalEntryView */ = {
+			isa = PBXGroup;
+			children = (
+				87E16DF22448BAFA00DFF2A3 /* ManualEntryVIew.swift */,
+				8733912E244E2A7000434489 /* JournalEntryTextField.swift */,
+				8730AE0524549AF500A47A9D /* JournalEntryChecker.swift */,
+			);
+			path = JournalEntryView;
+			sourceTree = "<group>";
+		};
 		8739FBED243CF892002457F3 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
 				876C26CA2438EC83006DD63B /* MasterView.swift */,
 				8739FBEB243CF7ED002457F3 /* GoalProgressView.swift */,
-				87E16DF22448BAFA00DFF2A3 /* EntryVIew.swift */,
 				87E16DF42448D1D700DFF2A3 /* AddEntryMenu.swift */,
+				87339130244E2A7C00434489 /* JournalEntryView */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -137,6 +153,7 @@
 				876C26C82438EC83006DD63B /* SceneDelegate.swift */,
 				87467AA2243EE1DF00B03ED4 /* Extenstions.swift */,
 				87E16DF02448B52F00DFF2A3 /* PersonalizedViews.swift */,
+				87B0040C244E1D4200956245 /* DataModel */,
 				8739FBED243CF892002457F3 /* HomeView */,
 				876A3AC82446259700D0471E /* SettingsVC */,
 				876C26CC2438EC84006DD63B /* Assets.xcassets */,
@@ -171,6 +188,14 @@
 				876C26EA2438EC84006DD63B /* Info.plist */,
 			);
 			path = ProteinJournalUITests;
+			sourceTree = "<group>";
+		};
+		87B0040C244E1D4200956245 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				87B0040A244E1D3900956245 /* ProteinEntry.swift */,
+			);
+			path = DataModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -308,12 +333,15 @@
 				87467AA3243EE1DF00B03ED4 /* Extenstions.swift in Sources */,
 				87E16DF12448B52F00DFF2A3 /* PersonalizedViews.swift in Sources */,
 				876C26C72438EC83006DD63B /* AppDelegate.swift in Sources */,
+				8733912F244E2A7000434489 /* JournalEntryTextField.swift in Sources */,
 				876C26C92438EC83006DD63B /* SceneDelegate.swift in Sources */,
+				87B0040B244E1D3900956245 /* ProteinEntry.swift in Sources */,
 				876C26CB2438EC83006DD63B /* MasterView.swift in Sources */,
 				876A3AC72446258D00D0471E /* SettingsView.swift in Sources */,
+				8730AE0724549B1C00A47A9D /* JournalEntryChecker.swift in Sources */,
 				87E16DF52448D1D700DFF2A3 /* AddEntryMenu.swift in Sources */,
 				874CFAD524464283003A273D /* SettingRow.swift in Sources */,
-				87E16DF32448BAFA00DFF2A3 /* EntryVIew.swift in Sources */,
+				87E16DF32448BAFA00DFF2A3 /* ManualEntryVIew.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

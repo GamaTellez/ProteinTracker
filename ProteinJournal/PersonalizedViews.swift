@@ -95,27 +95,12 @@ struct AddEntryMenuButton : View {
             Image(self.imageName)
                 .resizable()
                 .background(Color.black)
-                .rotationEffect(.degrees(self.entryMenuShowing ? 100 : 0))
+                .rotationEffect(.degrees(self.entryMenuShowing ? 180 : 0))
                 .animation(Animation.spring())
         })
             .frame(width: 80, height: 80, alignment: .trailing)
             .mask(Circle())
             .padding(.trailing, 20)
             .foregroundColor(Color.white)
-        
-        
-        
-        //        Button(action: { self.function() }) {
-        //            Image(self.imageName)
-        //                .resizable()
-        //                .background(Color.black)
-        //                .rotationEffect(.degrees( self.entryMenuShowing ? 180 : 0))
-        //                .animation(Animation.spring())
-        //
-        //        }
-        //        .frame(width: 80, height: 80, alignment: .trailing)
-        //        .mask(Circle())
-        //        .padding(.trailing, 20)
-        //        .foregroundColor(Color.white)
     }
 }

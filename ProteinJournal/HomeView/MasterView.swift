@@ -12,13 +12,15 @@ struct MasterView: View {
     @State private var settingsViewPresented = false
     @State private var analytivsViewPresented = false
     @State private var newEntryMenuViewShowing = false
-    @State private var entryViewShowing = false
+    @State private var manualEntryViewShowing = false
     
+    @State private var newJournalEntry : JournalEntry?
     
     @State private var endAngle = Angle.degrees(10)
     @State private var proteinCount = 10
     @State private var proteinGoal = 250
     @State private var caloriesCount = 00
+    
     
     var body : some View {
         ZStack {
@@ -33,7 +35,7 @@ struct MasterView: View {
                 }//HSTACK 1
                     .frame(minWidth: nil, idealWidth: nil, maxWidth: .infinity, minHeight: 50, idealHeight: nil, maxHeight: 50, alignment: .leading)
                     .background(Color.black)
-                    .padding(.top, 32)
+                    .padding(.top, 34)
                 HStack {
                     ZStack {
                         GoalProgressView(startAngle: .degrees(0), endAngle: .degrees(360), clockwise: true)
@@ -46,24 +48,26 @@ struct MasterView: View {
                                 }
                         }
                         GoalCountLabel(proteinCount: self.proteinCount, proteinGoal: self.proteinGoal)
-                        if self.entryViewShowing {
-                            ManualEntryView()
+                        if self.manualEntryViewShowing {
+                            ManualEntryView(isShowing: $manualEntryViewShowing, newJournalEntry: $newJournalEntry)
                         }
                     }
                 }
                 .frame(width: 350, height: 350, alignment: .top)
                 Spacer()
-                ZStack {
+                HStack {
                     CaloriesCircle(width: 110, height: 110, caloriesCount: 240)
                 }
-                
                 Spacer()
-                HStack {
-                    if self.newEntryMenuViewShowing {
-                        AddEntryMenuView()
+                
+                ZStack {
+                    HStack {
+                        Spacer()
+                        AddEntryMenuButton(function: { self.addEntryButtonTapped() }, imageName: "arrowUp", entryMenuShowing: self.newEntryMenuViewShowing)
+                        if self.newEntryMenuViewShowing {
+                            AddEntryMenuView(manualEntryFunction: self.manualEntryButtonTapped, searchEntryFuntion: self.searchEntryButtonTapped)
+                        }
                     }
-                    Spacer()
-                    AddEntryMenuButton(function: { self.addEntryButtonTapped() }, imageName: "arrowUp", entryMenuShowing: self.newEntryMenuViewShowing)
                 }
                 Spacer()
             }//VSTACK
@@ -84,6 +88,16 @@ struct MasterView: View {
         withAnimation {
             self.newEntryMenuViewShowing.toggle()
         }
+    }
+    
+    private func manualEntryButtonTapped() {
+        withAnimation {
+            self.manualEntryViewShowing.toggle()
+            self.newEntryMenuViewShowing.toggle()
+        }
+    }
+    
+    private func searchEntryButtonTapped() {
         
     }
 }

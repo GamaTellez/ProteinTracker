@@ -9,6 +9,9 @@
 import SwiftUI
 
 struct AddEntryMenuView : View {
+    var manualEntryFunction : () -> Void
+    var searchEntryFuntion : () -> Void
+    
     var body : some View {
         HStack {
             Spacer()
@@ -20,7 +23,7 @@ struct AddEntryMenuView : View {
                         .font(Font.custom("StringHelveticaNeue-CondensedBold", size: 15))
                     
                     
-                    Button(action: {  }) {
+                    Button(action: { self.searchEntryFuntion() }) {
                         Image("searchEntry")
                     }
                     .frame(width: 40, height: 40, alignment: .center)
@@ -35,7 +38,7 @@ struct AddEntryMenuView : View {
                         .foregroundColor(Color.white)
                         .font(Font.custom("StringHelveticaNeue-CondensedBold", size: 15))
                     
-                    Button(action: { }) {
+                    Button(action: { self.manualEntryFunction() }) {
                         Image("createEntry")
                     }
                     .frame(width: 40, height: 40, alignment: .center)
@@ -50,12 +53,5 @@ struct AddEntryMenuView : View {
             Spacer()
         }
         .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
-        
-    }
-    
-    struct ContentView_Previews: PreviewProvider {
-        static var previews: some View {
-            AddEntryMenuView()
-        }
     }
 }
