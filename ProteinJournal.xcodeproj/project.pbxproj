@@ -21,6 +21,9 @@
 		876C26D32438EC84006DD63B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 876C26D12438EC84006DD63B /* LaunchScreen.storyboard */; };
 		876C26DE2438EC84006DD63B /* ProteinJournalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C26DD2438EC84006DD63B /* ProteinJournalTests.swift */; };
 		876C26E92438EC84006DD63B /* ProteinJournalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C26E82438EC84006DD63B /* ProteinJournalUITests.swift */; };
+		876D7621245748940013E8AA /* EntrySavedBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876D7620245748940013E8AA /* EntrySavedBanner.swift */; };
+		876D762324577E430013E8AA /* NewEntryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876D762224577E430013E8AA /* NewEntryButton.swift */; };
+		876D7625245787CD0013E8AA /* ShowActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876D7624245787CD0013E8AA /* ShowActivityView.swift */; };
 		87B0040B244E1D3900956245 /* ProteinEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B0040A244E1D3900956245 /* ProteinEntry.swift */; };
 		87E16DF12448B52F00DFF2A3 /* PersonalizedViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E16DF02448B52F00DFF2A3 /* PersonalizedViews.swift */; };
 		87E16DF32448BAFA00DFF2A3 /* ManualEntryVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E16DF22448BAFA00DFF2A3 /* ManualEntryVIew.swift */; };
@@ -65,6 +68,9 @@
 		876C26E42438EC84006DD63B /* ProteinJournalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProteinJournalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		876C26E82438EC84006DD63B /* ProteinJournalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinJournalUITests.swift; sourceTree = "<group>"; };
 		876C26EA2438EC84006DD63B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		876D7620245748940013E8AA /* EntrySavedBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntrySavedBanner.swift; sourceTree = "<group>"; };
+		876D762224577E430013E8AA /* NewEntryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntryButton.swift; sourceTree = "<group>"; };
+		876D7624245787CD0013E8AA /* ShowActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowActivityView.swift; sourceTree = "<group>"; };
 		87B0040A244E1D3900956245 /* ProteinEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinEntry.swift; sourceTree = "<group>"; };
 		87E16DF02448B52F00DFF2A3 /* PersonalizedViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizedViews.swift; sourceTree = "<group>"; };
 		87E16DF22448BAFA00DFF2A3 /* ManualEntryVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualEntryVIew.swift; sourceTree = "<group>"; };
@@ -100,8 +106,10 @@
 			isa = PBXGroup;
 			children = (
 				87E16DF22448BAFA00DFF2A3 /* ManualEntryVIew.swift */,
+				876D7624245787CD0013E8AA /* ShowActivityView.swift */,
 				8733912E244E2A7000434489 /* JournalEntryTextField.swift */,
 				8730AE0524549AF500A47A9D /* JournalEntryChecker.swift */,
+				876D762224577E430013E8AA /* NewEntryButton.swift */,
 			);
 			path = JournalEntryView;
 			sourceTree = "<group>";
@@ -110,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				876C26CA2438EC83006DD63B /* MasterView.swift */,
+				876D7620245748940013E8AA /* EntrySavedBanner.swift */,
 				8739FBEB243CF7ED002457F3 /* GoalProgressView.swift */,
 				87E16DF42448D1D700DFF2A3 /* AddEntryMenu.swift */,
 				87339130244E2A7C00434489 /* JournalEntryView */,
@@ -339,8 +348,11 @@
 				876C26CB2438EC83006DD63B /* MasterView.swift in Sources */,
 				876A3AC72446258D00D0471E /* SettingsView.swift in Sources */,
 				8730AE0724549B1C00A47A9D /* JournalEntryChecker.swift in Sources */,
+				876D7625245787CD0013E8AA /* ShowActivityView.swift in Sources */,
 				87E16DF52448D1D700DFF2A3 /* AddEntryMenu.swift in Sources */,
+				876D7621245748940013E8AA /* EntrySavedBanner.swift in Sources */,
 				874CFAD524464283003A273D /* SettingRow.swift in Sources */,
+				876D762324577E430013E8AA /* NewEntryButton.swift in Sources */,
 				87E16DF32448BAFA00DFF2A3 /* ManualEntryVIew.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
