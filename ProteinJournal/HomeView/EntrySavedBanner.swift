@@ -9,10 +9,38 @@
 import SwiftUI
 
 struct EntrySavedBanner : View {
+    var entry : JournalEntry
     
     var body : some View {
-        HStack {
-            Text("")
+        VStack {
+            HStack {
+            Text("New Entry!")
+                .multilineTextAlignment(.leading)
+                .foregroundColor(.appGreen)
+                .font(Font.custom("StringHelveticaNeue-CondensedBold", size: 15))
+                .padding(5)
+                Spacer()
+            }
+            Text("Entry: \(self.entry.name) saved succesfully")
+                .multilineTextAlignment(.leading)
+                .font(Font.custom("StringHelveticaNeue-CondensedBold", size: 13))
+                .foregroundColor(.white)
+                .padding(5)
         }
+        .frame(minWidth: 200, idealWidth: .infinity, maxWidth: .infinity, minHeight: 70, idealHeight: nil, maxHeight: 70, alignment: .leading)
+        .transition(.asymmetric(insertion: AnyTransition.opacity.combined(with: .slide), removal: .scale))
+        .background(Color.black)
+        .clipShape(RoundedCorner(radius: 10, corners: [.topRight, .bottomRight]))
+    }
+}
+
+struct RoundedCorner: Shape {
+
+    var radius: CGFloat = .infinity
+    var corners: UIRectCorner = .allCorners
+
+    func path(in rect: CGRect) -> Path {
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: self.corners, cornerRadii: CGSize(width: self.radius, height: self.radius))
+        return Path(path.cgPath)
     }
 }
