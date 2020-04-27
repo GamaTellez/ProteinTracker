@@ -21,8 +21,6 @@ struct AddEntryMenuView : View {
                     Text("Search entry")
                         .foregroundColor(Color.white)
                         .font(Font.custom("StringHelveticaNeue-CondensedBold", size: 15))
-                    
-                    
                     Button(action: { self.searchEntryFuntion() }) {
                         Image("searchEntry")
                     }
