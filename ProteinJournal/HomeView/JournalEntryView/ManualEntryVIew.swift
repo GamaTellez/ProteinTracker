@@ -12,8 +12,10 @@ import SwiftUI
 struct ManualEntryView : View {
     
     @ObservedObject private var entryChecker : EntryChecker = EntryChecker()
-    @Binding var isShowing : Bool
+    @Binding var isViewShowing : Bool
     @Binding var newJournalEntry : JournalEntry?
+    @Binding var newEntryBannerShouldShow : Bool
+    @State private var showActivityView = false
     
     var body : some View {
         VStack {
@@ -21,42 +23,34 @@ struct ManualEntryView : View {
                 .foregroundColor(Color.white)
                 .font(Font.custom("StringHelveticaNeue-CondensedBold", size: 20))
                 .padding(10)
-                JournalEntryTextField(placeHolder: "Name", textBinding: $entryChecker.entryName, keyBoard: .default)
-                JournalEntryTextField(placeHolder: "Protein", textBinding: $entryChecker.entryProtein, keyBoard: .numberPad)
-                JournalEntryTextField(placeHolder: "Calories", textBinding: $entryChecker.entryCalories, keyBoard: .numberPad)
-            HStack {
-                Spacer()
-                VStack {
+                .frame(width: 280, height: 50, alignment: .center)
+            JournalEntryTextField(placeHolder: "Name", textBinding: $entryChecker.entryName, keyBoard: .default)
+            JournalEntryTextField(placeHolder: "Protein", textBinding: $entryChecker.entryProtein, keyBoard: .numberPad)
+            JournalEntryTextField(placeHolder: "Calories", textBinding: $entryChecker.entryCalories, keyBoard: .numberPad)
+            
+            if !self.showActivityView {
+                HStack {
                     Spacer()
-                    Button(action: { self.cancelButtonTapped() }) {
-                        Text("Cancel")
+                    VStack {
+                        Spacer()
+                        NewEntryButton(saveAction: self.cancelButtonTapped, entryChecker: self.entryChecker, type: .cancel)
+                        Spacer()
                     }
-                    .foregroundColor(Color.white)
-                    .font(Font.custom("StringHelveticaNeue-CondensedBold", size: 20))
-                    .frame(width: 100, height: 30, alignment: .center)
-                    .border(Color.white, width: 1)
-                    .cornerRadius(10)
-                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.white, lineWidth: 1))
+                    Spacer()
+                    VStack {
+                        Spacer()
+                        NewEntryButton(saveAction: self.saveButtonTapped, entryChecker: self.entryChecker, type: .save)
+                        Spacer()
+                    }
                     Spacer()
                 }
-                Spacer()
-                VStack {
-                   
-                    Spacer()
-                    Button(action: { self.saveButtonTapped() }) {
-                        Text("Save")
-                    }
-                    .foregroundColor(Color.white)
-                    .disabled(!self.entryChecker.isFormFilled)
-                    .font(Font.custom("StringHelveticaNeue-CondensedBold", size: 20))
-                    .frame(width: self.entryChecker.isFormFilled ? 130 : 100, height: self.entryChecker.isFormFilled ? 50 : 30, alignment: .center)
-                    .border(Color.white, width: 1)
-                    .cornerRadius(10)
-                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.white, lineWidth: 1))
-                    .transition(AnyTransition.opacity.animation(.easeInOut(duration: 0.2)))
-                    Spacer()
+            }
+            if showActivityView {
+                HStack {
+                    ShowActivityView()
+                        .frame(width: 50, height: 50, alignment: .center)
+                        .foregroundColor(Color.white)
                 }
-                Spacer()
             }
             Spacer()
         }
@@ -64,15 +58,37 @@ struct ManualEntryView : View {
         .background(Color.black)
         .cornerRadius(20)
         .transition(AnyTransition.opacity.combined(with: .scale))
+        .onDisappear {
+            self.masterViewEntrySavedBannerShouldShow()
+        }
+    }
+    
+    private func masterViewEntrySavedBannerShouldShow() {
+        if self.newJournalEntry != nil {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                withAnimation {
+                    self.newEntryBannerShouldShow.toggle()
+                }
+            }
+        }
     }
     
     private func cancelButtonTapped() {
         withAnimation {
-            self.isShowing.toggle()
+            self.isViewShowing.toggle()
         }
     }
     
     private func saveButtonTapped() {
-        print("It is enabled")
+        self.showActivityView.toggle()
+        if let newJournalEntry = self.entryChecker.newEntry() {
+            self.newJournalEntry = newJournalEntry
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {//removew when actually saving to icloud
+                withAnimation {
+                    self.isViewShowing.toggle()
+                }
+            }
+        }
     }
 }
