@@ -9,12 +9,12 @@
 import Foundation
 
 final class JournalEntry {
-    private var dateCreated : Date
-    private var calories : Int
-    private var protein : Int
-    private var name : String
+    private(set) var dateCreated : Date
+    private(set) var calories : Int
+    private(set) var protein : Int
+    private(set) var name : String
     
-    init(created:Date, with calories:Int, protein: Int, name:String ) {
+    init(created:Date, calories:Int, protein: Int, name:String ) {
         self.dateCreated = created
         self.calories = calories
         self.protein = protein
