@@ -9,14 +9,13 @@
 import Foundation
 import SwiftUI
 
-class EntryChecker : ObservableObject {
+final class EntryChecker : ObservableObject {
     
-    @Published var isFormFilled : Bool = false {
-        didSet {
-            print("Form filled: \(self.isFormFilled)")
-        }
-    }
-    
+    @Published var isFormFilled : Bool = false
+    fileprivate var name : String?
+    fileprivate var protein : Int?
+    fileprivate var calories : Int?
+
     var isEntryNameValid : Bool = false {
         didSet {
             withAnimation {
@@ -41,21 +40,18 @@ class EntryChecker : ObservableObject {
     
     var entryName : String = "" {
         didSet {
-            print("name:  \(self.entryName)")
             self.isEntryNameValid = self.checkName(name: self.entryName)
         }
     }
     
     var entryProtein : String = "" {
         didSet {
-            print("name:  \(self.entryProtein)")
             self.isEntryProteinValid = self.checkProtein(protein:self.entryProtein)
         }
     }
     
     var entryCalories : String = "" {
         didSet {
-            print("name:  \(self.entryCalories)")
             self.isEntryCaloriesValid = self.checkCalories(calories:self.entryCalories)
         }
     }
@@ -64,19 +60,22 @@ class EntryChecker : ObservableObject {
         if name.trimmingCharacters(in: .whitespaces).isEmpty {
             return false
         } else {
+            self.name = name
             return true
         }
     }
     
     private func checkProtein(protein:String) -> Bool {
-        if Int(protein) != nil {
+        if let theProtein = Int(protein) {
+            self.protein = theProtein
             return true
         }
         return false
     }
     
     private func checkCalories(calories:String) -> Bool {
-        if Int(calories) != nil {
+        if let theCalories = Int(calories) {
+            self.calories = theCalories
             return true
         }
         return false
@@ -88,5 +87,12 @@ class EntryChecker : ObservableObject {
         } else {
             return false
         }
+    }
+    
+    internal func newEntry() -> JournalEntry? {
+        guard let newEntryName = self.name, let newEntryProtein = self.protein, let newEntryCalories = self.calories else {
+            return nil
+        }
+        return JournalEntry(created: Date(), calories: newEntryCalories, protein: newEntryProtein, name: newEntryName)
     }
 }
