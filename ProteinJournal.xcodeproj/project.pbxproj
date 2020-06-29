@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8730AE0724549B1C00A47A9D /* JournalEntryChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8730AE0524549AF500A47A9D /* JournalEntryChecker.swift */; };
-		8733912F244E2A7000434489 /* JournalEntryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733912E244E2A7000434489 /* JournalEntryTextField.swift */; };
-		8739FBEC243CF7ED002457F3 /* GoalProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739FBEB243CF7ED002457F3 /* GoalProgressView.swift */; };
+		8730AE0724549B1C00A47A9D /* EntryVeryfier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8730AE0524549AF500A47A9D /* EntryVeryfier.swift */; };
+		8733912F244E2A7000434489 /* EntryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733912E244E2A7000434489 /* EntryTextField.swift */; };
 		87467AA3243EE1DF00B03ED4 /* Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87467AA2243EE1DF00B03ED4 /* Extenstions.swift */; };
 		874CFAD524464283003A273D /* SettingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874CFAD424464283003A273D /* SettingRow.swift */; };
+		87573320246203C500AA587E /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8757331F246203C500AA587E /* CloudKit.framework */; };
+		8757332224621EF800AA587E /* CircleGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8757332124621EF800AA587E /* CircleGoalView.swift */; };
+		8757332424621F7C00AA587E /* BarMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8757332324621F7C00AA587E /* BarMenuView.swift */; };
 		876A3AC72446258D00D0471E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876A3AC62446258D00D0471E /* SettingsView.swift */; };
 		876C26C72438EC83006DD63B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C26C62438EC83006DD63B /* AppDelegate.swift */; };
 		876C26C92438EC83006DD63B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C26C82438EC83006DD63B /* SceneDelegate.swift */; };
@@ -22,9 +24,12 @@
 		876C26DE2438EC84006DD63B /* ProteinJournalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C26DD2438EC84006DD63B /* ProteinJournalTests.swift */; };
 		876C26E92438EC84006DD63B /* ProteinJournalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C26E82438EC84006DD63B /* ProteinJournalUITests.swift */; };
 		876D7621245748940013E8AA /* EntrySavedBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876D7620245748940013E8AA /* EntrySavedBanner.swift */; };
-		876D762324577E430013E8AA /* NewEntryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876D762224577E430013E8AA /* NewEntryButton.swift */; };
+		876D762324577E430013E8AA /* SaveEntryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876D762224577E430013E8AA /* SaveEntryButton.swift */; };
 		876D7625245787CD0013E8AA /* ShowActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876D7624245787CD0013E8AA /* ShowActivityView.swift */; };
 		87B0040B244E1D3900956245 /* ProteinEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B0040A244E1D3900956245 /* ProteinEntry.swift */; };
+		87B51D84245A963C00017564 /* ProteinGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B51D83245A963C00017564 /* ProteinGoal.swift */; };
+		87CBD84D24663755007C9BFB /* NoiCloudAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CBD84C24663755007C9BFB /* NoiCloudAnimation.swift */; };
+		87DE57DB24A174D700C3C6FA /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DE57DA24A174D700C3C6FA /* ProgressBar.swift */; };
 		87E16DF12448B52F00DFF2A3 /* PersonalizedViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E16DF02448B52F00DFF2A3 /* PersonalizedViews.swift */; };
 		87E16DF32448BAFA00DFF2A3 /* ManualEntryVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E16DF22448BAFA00DFF2A3 /* ManualEntryVIew.swift */; };
 		87E16DF52448D1D700DFF2A3 /* AddEntryMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E16DF42448D1D700DFF2A3 /* AddEntryMenu.swift */; };
@@ -48,11 +53,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8730AE0524549AF500A47A9D /* JournalEntryChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryChecker.swift; sourceTree = "<group>"; };
-		8733912E244E2A7000434489 /* JournalEntryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryTextField.swift; sourceTree = "<group>"; };
-		8739FBEB243CF7ED002457F3 /* GoalProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalProgressView.swift; sourceTree = "<group>"; };
+		8730AE0524549AF500A47A9D /* EntryVeryfier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryVeryfier.swift; sourceTree = "<group>"; };
+		8733912E244E2A7000434489 /* EntryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryTextField.swift; sourceTree = "<group>"; };
 		87467AA2243EE1DF00B03ED4 /* Extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extenstions.swift; sourceTree = "<group>"; };
 		874CFAD424464283003A273D /* SettingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRow.swift; sourceTree = "<group>"; };
+		8757331D2462033500AA587E /* ProteinJournal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ProteinJournal.entitlements; sourceTree = "<group>"; };
+		8757331F246203C500AA587E /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		8757332124621EF800AA587E /* CircleGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleGoalView.swift; sourceTree = "<group>"; };
+		8757332324621F7C00AA587E /* BarMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarMenuView.swift; sourceTree = "<group>"; };
 		876A3AC62446258D00D0471E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		876C26C32438EC83006DD63B /* ProteinJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProteinJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		876C26C62438EC83006DD63B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -69,9 +77,12 @@
 		876C26E82438EC84006DD63B /* ProteinJournalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinJournalUITests.swift; sourceTree = "<group>"; };
 		876C26EA2438EC84006DD63B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		876D7620245748940013E8AA /* EntrySavedBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntrySavedBanner.swift; sourceTree = "<group>"; };
-		876D762224577E430013E8AA /* NewEntryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntryButton.swift; sourceTree = "<group>"; };
+		876D762224577E430013E8AA /* SaveEntryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveEntryButton.swift; sourceTree = "<group>"; };
 		876D7624245787CD0013E8AA /* ShowActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowActivityView.swift; sourceTree = "<group>"; };
 		87B0040A244E1D3900956245 /* ProteinEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinEntry.swift; sourceTree = "<group>"; };
+		87B51D83245A963C00017564 /* ProteinGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinGoal.swift; sourceTree = "<group>"; };
+		87CBD84C24663755007C9BFB /* NoiCloudAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoiCloudAnimation.swift; sourceTree = "<group>"; };
+		87DE57DA24A174D700C3C6FA /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		87E16DF02448B52F00DFF2A3 /* PersonalizedViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizedViews.swift; sourceTree = "<group>"; };
 		87E16DF22448BAFA00DFF2A3 /* ManualEntryVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualEntryVIew.swift; sourceTree = "<group>"; };
 		87E16DF42448D1D700DFF2A3 /* AddEntryMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEntryMenu.swift; sourceTree = "<group>"; };
@@ -82,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87573320246203C500AA587E /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,10 +118,11 @@
 			isa = PBXGroup;
 			children = (
 				87E16DF22448BAFA00DFF2A3 /* ManualEntryVIew.swift */,
+				87DE57DA24A174D700C3C6FA /* ProgressBar.swift */,
 				876D7624245787CD0013E8AA /* ShowActivityView.swift */,
-				8733912E244E2A7000434489 /* JournalEntryTextField.swift */,
-				8730AE0524549AF500A47A9D /* JournalEntryChecker.swift */,
-				876D762224577E430013E8AA /* NewEntryButton.swift */,
+				8733912E244E2A7000434489 /* EntryTextField.swift */,
+				8730AE0524549AF500A47A9D /* EntryVeryfier.swift */,
+				876D762224577E430013E8AA /* SaveEntryButton.swift */,
 			);
 			path = JournalEntryView;
 			sourceTree = "<group>";
@@ -118,12 +131,22 @@
 			isa = PBXGroup;
 			children = (
 				876C26CA2438EC83006DD63B /* MasterView.swift */,
+				8757332324621F7C00AA587E /* BarMenuView.swift */,
+				8757332124621EF800AA587E /* CircleGoalView.swift */,
 				876D7620245748940013E8AA /* EntrySavedBanner.swift */,
-				8739FBEB243CF7ED002457F3 /* GoalProgressView.swift */,
 				87E16DF42448D1D700DFF2A3 /* AddEntryMenu.swift */,
+				87CBD84C24663755007C9BFB /* NoiCloudAnimation.swift */,
 				87339130244E2A7C00434489 /* JournalEntryView */,
 			);
 			path = HomeView;
+			sourceTree = "<group>";
+		};
+		8757331E246203C500AA587E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8757331F246203C500AA587E /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		876A3AC82446259700D0471E /* SettingsVC */ = {
@@ -142,6 +165,7 @@
 				876C26DC2438EC84006DD63B /* ProteinJournalTests */,
 				876C26E72438EC84006DD63B /* ProteinJournalUITests */,
 				876C26C42438EC83006DD63B /* Products */,
+				8757331E246203C500AA587E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -158,6 +182,7 @@
 		876C26C52438EC83006DD63B /* ProteinJournal */ = {
 			isa = PBXGroup;
 			children = (
+				8757331D2462033500AA587E /* ProteinJournal.entitlements */,
 				876C26C62438EC83006DD63B /* AppDelegate.swift */,
 				876C26C82438EC83006DD63B /* SceneDelegate.swift */,
 				87467AA2243EE1DF00B03ED4 /* Extenstions.swift */,
@@ -203,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				87B0040A244E1D3900956245 /* ProteinEntry.swift */,
+				87B51D83245A963C00017564 /* ProteinGoal.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -338,21 +364,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8739FBEC243CF7ED002457F3 /* GoalProgressView.swift in Sources */,
 				87467AA3243EE1DF00B03ED4 /* Extenstions.swift in Sources */,
 				87E16DF12448B52F00DFF2A3 /* PersonalizedViews.swift in Sources */,
 				876C26C72438EC83006DD63B /* AppDelegate.swift in Sources */,
-				8733912F244E2A7000434489 /* JournalEntryTextField.swift in Sources */,
+				8733912F244E2A7000434489 /* EntryTextField.swift in Sources */,
 				876C26C92438EC83006DD63B /* SceneDelegate.swift in Sources */,
 				87B0040B244E1D3900956245 /* ProteinEntry.swift in Sources */,
+				87B51D84245A963C00017564 /* ProteinGoal.swift in Sources */,
 				876C26CB2438EC83006DD63B /* MasterView.swift in Sources */,
+				8757332224621EF800AA587E /* CircleGoalView.swift in Sources */,
 				876A3AC72446258D00D0471E /* SettingsView.swift in Sources */,
-				8730AE0724549B1C00A47A9D /* JournalEntryChecker.swift in Sources */,
+				8730AE0724549B1C00A47A9D /* EntryVeryfier.swift in Sources */,
 				876D7625245787CD0013E8AA /* ShowActivityView.swift in Sources */,
+				8757332424621F7C00AA587E /* BarMenuView.swift in Sources */,
 				87E16DF52448D1D700DFF2A3 /* AddEntryMenu.swift in Sources */,
 				876D7621245748940013E8AA /* EntrySavedBanner.swift in Sources */,
+				87CBD84D24663755007C9BFB /* NoiCloudAnimation.swift in Sources */,
 				874CFAD524464283003A273D /* SettingRow.swift in Sources */,
-				876D762324577E430013E8AA /* NewEntryButton.swift in Sources */,
+				876D762324577E430013E8AA /* SaveEntryButton.swift in Sources */,
+				87DE57DB24A174D700C3C6FA /* ProgressBar.swift in Sources */,
 				87E16DF32448BAFA00DFF2A3 /* ManualEntryVIew.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -518,6 +548,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ProteinJournal/ProteinJournal.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"ProteinJournal/Preview Content\"";
 				DEVELOPMENT_TEAM = FCJBBVX9H7;
@@ -527,7 +558,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = gamateTellez.ProteinJournal;
+				PRODUCT_BUNDLE_IDENTIFIER = gamaTellez.ProteinJournal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -538,6 +569,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ProteinJournal/ProteinJournal.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"ProteinJournal/Preview Content\"";
 				DEVELOPMENT_TEAM = FCJBBVX9H7;
@@ -547,7 +579,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = gamateTellez.ProteinJournal;
+				PRODUCT_BUNDLE_IDENTIFIER = gamaTellez.ProteinJournal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

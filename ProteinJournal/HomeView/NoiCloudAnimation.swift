@@ -6,4 +6,14 @@
 //  Copyright © 2020 GamaTellez. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
+
+
+struct NoiCloudAnimation : View {
+    
+    var body : some View {
+        ZStack {
+            Text("dsds")
+        }
+    }
+}
