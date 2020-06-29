@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct EntrySavedBanner : View {
-    var entry : JournalEntry
+    var entry : ProteinEntry
     
     var body : some View {
         VStack {
