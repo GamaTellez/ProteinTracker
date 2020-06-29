@@ -9,104 +9,83 @@
 import SwiftUI
 
 struct MasterView: View {
-    @State private var settingsViewPresented = false
-    @State private var analyticsViewPresented = false
-    @State private var newEntryMenuViewShowing = false
-    @State private var manualEntryViewShowing = false
-    @State private var newEntryBannerShouldShow = false
+    @State private var iCouldEnabled = true
+    @State var settingsViewPresented = false
+    @State var analyticsViewPresented = false
+    @State private var newEntryMenuShouldShow = false
+    @State private var manualEntryViewShouldShow = false
+    @State private var newEntrySavedSuccesfully = false
+    @State private var proteinCountChanged = false
+    @State private var manualEntryViewPresented = false
+    @State private var searchEntryViewPresented = false
+    @State private var newJournalEntry : ProteinEntry?
+    @State private var currentGoal = ProteinGoal(dateCreated: Date(), proteinEntries: [ProteinEntry](), proteinGoal: 259)
     
-    @State private var newJournalEntry : JournalEntry?
-    
-    @State private var endAngle = Angle.degrees(10)
-    @State private var proteinCount = 10
-    @State private var proteinGoal = 250
-    @State private var caloriesCount = 00
-    
-    
+    init() {
+        
+    }
     var body : some View {
         ZStack {
-            VStack {
-                HStack {
-                    BarButton(imageName: "settings", function: {self.settingsViewPresented.toggle() }, side: .leading, paddingSize: 10)
-                        .sheet(isPresented: $settingsViewPresented) { SettingsView() }
-                    Spacer()
-                    DayText(text:"Monday March 20th")
-                    Spacer()
-                    BarButton(imageName: "analytics", function: { self.analyticsViewPresented.toggle() }, side: .trailing, paddingSize: 10)
-                }
-                .frame(minWidth: nil, idealWidth: nil, maxWidth: .infinity, minHeight: 50, idealHeight: nil, maxHeight: 50, alignment: .leading)
-                .background(Color.black)
-                .padding(.top, 34)
-                HStack {
+            
+            if self.iCouldEnabled {
+                VStack {
+                    BarMenuView(settingsViewPresented: self.$settingsViewPresented, analyticsViewPresented: self.$analyticsViewPresented)
                     ZStack {
-                        GoalProgressView(startAngle: .degrees(0), endAngle: .degrees(360), clockwise: true)
-                            .stroke(Color.white, lineWidth: 60)
-                        GoalProgressView(startAngle: .degrees(0), endAngle: self.endAngle, clockwise: true)
-                            .stroke(Color.appGreen, lineWidth: 60)
-                            .onTapGesture {
-                                withAnimation {
-                                    self.endAngle += .degrees(10)
-                                }
-                        }
-                        GoalCountLabel(proteinCount: self.proteinCount, proteinGoal: self.proteinGoal)
-                        if self.manualEntryViewShowing {
-                            ManualEntryView(isViewShowing: self.$manualEntryViewShowing, newJournalEntry: self.$newJournalEntry, newEntryBannerShouldShow: self.$newEntryBannerShouldShow)
-                        }
+                        CircleGoalView(proteinCount: 200, proteinGoal: 400)
                     }
-                }
-                .frame(width: 350, height: 350, alignment: .top)
-                Spacer()
-                HStack {
-                    CaloriesCircle(width: 110, height: 110, caloriesCount: 240)
-                }
-                Spacer()
-                ZStack {
+                    Spacer()
                     HStack {
-                        if self.newEntryBannerShouldShow {
-                            EntrySavedBanner(entry: JournalEntry(created: Date(), calories: 23, protein: 34, name: "Chicken Enchiladas"))
-                                .onAppear {
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                                        withAnimation {
-                                            self.newEntryBannerShouldShow.toggle()
-                                        }
-                                    }
+                        CaloriesCircle(width: 110, height: 110, caloriesCount: 240)
+                        if self.newEntryMenuShouldShow {
+                            AddEntryMenu(manualEntryViewPresented: self.$manualEntryViewPresented, searchEntryViewPresented: self.$searchEntryViewPresented)
+                        }
+                    }
+                    Spacer()
+                    ZStack {
+                        HStack {
+                            if self.newEntrySavedSuccesfully {
+                                self.showEntrySavedNotificationBanner()
                             }
-                        }
-                        Spacer()
-                        AddEntryMenuButton(function: { self.addEntryButtonTapped() }, imageName: "arrowUp", entryMenuShowing: self.newEntryMenuViewShowing)
-                        if self.newEntryMenuViewShowing {
-                            AddEntryMenuView(manualEntryFunction: self.manualEntryButtonTapped, searchEntryFuntion: self.searchEntryButtonTapped)
-                        }
-                    }.onAppear {
-                        if self.newJournalEntry != nil {
-                            withAnimation {
-                                self.analyticsViewPresented.toggle()
+                            Spacer()
+                            AddEntryButton(function: { self.addEntryButtonTapped() }, imageName: "arrowUp", entryMenuShowing: self.newEntryMenuShouldShow)
+                        }.onAppear {
+                            if self.newJournalEntry != nil {
+                                withAnimation {
+                                    self.analyticsViewPresented.toggle()
+                                }
                             }
                         }
                     }
+                    Spacer()
                 }
-                Spacer()
-            }//VSTACK
                 .frame(minWidth: nil, idealWidth: nil, maxWidth: .infinity, minHeight: nil, idealHeight: nil, maxHeight: .infinity, alignment: .center)
-                .background(Color.viewControllersGrey).edgesIgnoringSafeArea(.all)
+                .background(Color.backgroundGrey).edgesIgnoringSafeArea(.all)
+            } else {
+                VStack {
+                    Text("Protein Journal needs your iCloud drive to be turned on to store your data. Don't worry though, you can easily delete it at anytime")
+                        .multilineTextAlignment(.center)
+                }.frame(minWidth: nil, idealWidth: nil, maxWidth: .infinity, minHeight: nil, idealHeight: nil, maxHeight: .infinity, alignment: .center)
+                    .background(Color.backgroundGrey).edgesIgnoringSafeArea(.all)
+            }
+        }
+    }
+    
+    private func showEntrySavedNotificationBanner() -> some View {
+        return EntrySavedBanner(entry: self.newJournalEntry!)
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    withAnimation {
+                        self.newEntrySavedSuccesfully.toggle()
+                        self.newJournalEntry = nil
+                    }
+                }
         }
     }
     
     private func addEntryButtonTapped() {
         withAnimation {
-            self.newEntryMenuViewShowing.toggle()
+            self.newEntryMenuShouldShow.toggle()
         }
-    }
-    
-    private func manualEntryButtonTapped() {
-        withAnimation {
-            self.manualEntryViewShowing.toggle()
-            self.newEntryMenuViewShowing.toggle()
-        }
-    }
-    
-    private func searchEntryButtonTapped() {
-        
     }
 }
 
