@@ -8,10 +8,11 @@
 
 import SwiftUI
 
-struct AddEntryMenuView : View {
-    var manualEntryFunction : () -> Void
-    var searchEntryFuntion : () -> Void
-    
+struct AddEntryMenu : View {
+//    var manualEntryFunction : () -> Void
+//    var searchEntryFuntion : () -> Void
+    @Binding var manualEntryViewPresented : Bool
+    @Binding var searchEntryViewPresented : Bool
     var body : some View {
         HStack {
             Spacer()
@@ -19,31 +20,33 @@ struct AddEntryMenuView : View {
                 Spacer()
                 HStack {
                     Text("Search entry")
-                        .foregroundColor(Color.white)
+                        .foregroundColor(Color.foreGroundColor)
                         .font(Font.custom("StringHelveticaNeue-CondensedBold", size: 15))
-                    Button(action: { self.searchEntryFuntion() }) {
+                    Button(action: { self.searchEntryViewPresented.toggle() }) {
                         Image("searchEntry")
                     }
                     .frame(width: 40, height: 40, alignment: .center)
                     .mask(Circle())
-                    .foregroundColor(Color.white)
-                    .overlay(Circle().stroke(Color.white, lineWidth: 0.5))
+                    .foregroundColor(Color.foreGroundColor)
+                    .overlay(Circle().stroke(Color.foreGroundColor, lineWidth: 0.5))
                 }
                 Spacer()
                 
                 HStack {
                     Text("Create entry")
-                        .foregroundColor(Color.white)
+                        .foregroundColor(Color.foreGroundColor)
                         .font(Font.custom("StringHelveticaNeue-CondensedBold", size: 15))
                     
-                    Button(action: { self.manualEntryFunction() }) {
+                    Button(action: { self.manualEntryViewPresented.toggle() }) {
                         Image("createEntry")
                     }
+                    .sheet(isPresented: self.$manualEntryViewPresented) { ManualEntryView() }
                     .frame(width: 40, height: 40, alignment: .center)
                     .mask(Circle())
-                    .foregroundColor(Color.white)
-                    .overlay(Circle().stroke(Color.white, lineWidth: 0.5))
+                    .foregroundColor(Color.foreGroundColor)
+                    .overlay(Circle().stroke(Color.foreGroundColor, lineWidth: 0.5))
                     .padding(.top, 5)
+                    
                 }
                 Spacer()
             }
