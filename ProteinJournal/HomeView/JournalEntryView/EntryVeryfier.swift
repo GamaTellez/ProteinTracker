@@ -9,9 +9,9 @@
 import Foundation
 import SwiftUI
 
-final class EntryChecker : ObservableObject {
+final class EntryVeryfier : ObservableObject {
     
-    @Published var isFormFilled : Bool = false
+    @Published var portionFilled : ProgressPortion = .none
     fileprivate var name : String?
     fileprivate var protein : Int?
     fileprivate var calories : Int?
@@ -19,21 +19,21 @@ final class EntryChecker : ObservableObject {
     var isEntryNameValid : Bool = false {
         didSet {
             withAnimation {
-                self.isFormFilled = self.checkFormFilled(validName: self.isEntryNameValid, validProtein: self.isEntryProteinValid, validCalories: self.isEntryCaloriesValid)
+                self.portionFilled = self.checkFormFilled(validName: self.isEntryNameValid, validProtein: self.isEntryProteinValid, validCalories: self.isEntryCaloriesValid)
             }
         }
     }
     var isEntryProteinValid : Bool = false {
         didSet {
             withAnimation {
-                self.isFormFilled = self.checkFormFilled(validName: self.isEntryNameValid, validProtein: self.isEntryProteinValid, validCalories: self.isEntryCaloriesValid)
+                self.portionFilled = self.checkFormFilled(validName: self.isEntryNameValid, validProtein: self.isEntryProteinValid, validCalories: self.isEntryCaloriesValid)
             }
         }
     }
     var isEntryCaloriesValid : Bool = false {
         didSet {
             withAnimation {
-                self.isFormFilled = self.checkFormFilled(validName: self.isEntryNameValid, validProtein: self.isEntryProteinValid, validCalories: self.isEntryCaloriesValid)
+                self.portionFilled = self.checkFormFilled(validName: self.isEntryNameValid, validProtein: self.isEntryProteinValid, validCalories: self.isEntryCaloriesValid)
             }
         }
     }
@@ -81,12 +81,29 @@ final class EntryChecker : ObservableObject {
         return false
     }
     
-    private func checkFormFilled(validName:Bool, validProtein:Bool, validCalories:Bool) -> Bool {
-        if validName && validProtein && validCalories {
-            return true
-        } else {
-            return false
+    private func checkFormFilled(validName:Bool, validProtein:Bool, validCalories:Bool) -> ProgressPortion {        
+        if validName && !validProtein && !validCalories {
+            return .oneThird
         }
+        if !validName && validProtein && !validCalories {
+            return .oneThird
+        }
+        if !validName && !validProtein && validCalories {
+            return .oneThird
+        }
+        if validName && validProtein && !validCalories {
+            return .twoThirds
+        }
+        if validName && !validProtein && validCalories {
+            return .twoThirds
+        }
+        if !validName && validProtein && validCalories {
+            return .twoThirds
+        }
+        if validName && validProtein && validCalories {
+            return .threeThirds
+        }
+        return .none
     }
     
     internal func saveNewEntry() -> ProteinEntry? {
