@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class JournalEntry {
+final class ProteinEntry {
     private(set) var dateCreated : Date
     private(set) var calories : Int
     private(set) var protein : Int

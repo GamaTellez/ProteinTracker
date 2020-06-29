@@ -89,10 +89,10 @@ final class EntryChecker : ObservableObject {
         }
     }
     
-    internal func newEntry() -> JournalEntry? {
+    internal func saveNewEntry() -> ProteinEntry? {
         guard let newEntryName = self.name, let newEntryProtein = self.protein, let newEntryCalories = self.calories else {
             return nil
         }
-        return JournalEntry(created: Date(), calories: newEntryCalories, protein: newEntryProtein, name: newEntryName)
+        return ProteinEntry(created: Date(), calories: newEntryCalories, protein: newEntryProtein, name: newEntryName)
     }
 }
