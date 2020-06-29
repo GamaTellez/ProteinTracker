@@ -12,20 +12,18 @@ struct SettingsView : View {
     
     let appSettings: [Setting] = [Setting(title: "New day", imageName: "newDay", description: "Start a new day"),
                                   Setting(title: "New Goal", imageName: "goal", description: "Set a new protein goal")]
-    
     let icloudSettings: [Setting] = [Setting(title: "Clear Data", imageName: "clear", description: "Clear all data stored in iCloud"),Setting(title: "Logout", imageName: "logout", description: "Logout from your iCloud")]
     var body : some View {
-        
         VStack {
             HStack {
                 Button(action: { self.dismissVC() }) {
                     Image("dismiss").foregroundColor(Color.white)
                 }
-                .foregroundColor(Color.appGreen)
+                .foregroundColor(Color.foreGroundColor)
                 .padding(.trailing, 5)
                 
                 Text("Settings")
-                .foregroundColor(Color.white)
+                .foregroundColor(Color.foreGroundColor)
             }
             .frame(minWidth: nil, idealWidth: nil, maxWidth: .infinity, minHeight: 50, idealHeight: nil, maxHeight: 50, alignment: .leading)
             .background(Color.black)
@@ -34,7 +32,7 @@ struct SettingsView : View {
             Spacer()
             
             List {
-                Section(header:Text("Muscle journal")) {
+                Section(header:Text("Protein journal")) {
                     ForEach(self.appSettings) { appSetting in
                         SettingRow(setting: appSetting)
                         }
@@ -50,7 +48,7 @@ struct SettingsView : View {
             
             
         }.frame(minWidth: nil, idealWidth: nil, maxWidth: .infinity, minHeight: nil, idealHeight: nil, maxHeight: .infinity, alignment: .center)
-        .background(Color.viewControllersGrey).edgesIgnoringSafeArea(.all)
+        .background(Color.backgroundGrey).edgesIgnoringSafeArea(.all)
     }
 
     private func dismissVC() {
