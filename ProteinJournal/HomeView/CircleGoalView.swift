@@ -17,8 +17,7 @@ struct CircleGoalView : View {
     var proteinGoal : Int
     
     var body : some View {
-        
-        GeometryReader { geometry in
+        GeometryReader { geometry in //<--------- check this one
             HStack {
                 ZStack {
                     GoalBaseShape()

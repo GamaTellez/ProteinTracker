@@ -9,6 +9,22 @@
 import Foundation
 import SwiftUI
 
+//MARK: helper structures
+struct Constants {
+    struct ICloudKeys {
+        static let isICloudAvailable = "isIcloudAvailable"
+    }
+    struct Images {
+        static let iCloud = "iCloud"
+        static let iCloudOff = "iCloudOff"
+        static let iCloudOn = "iCloudOn"
+        static let iPhone = "iPhone"
+    }
+}
+
+
+
+
 //MARK: UIColorExtensions
 extension Color {
     static let backgroundGrey = Color("viewControllersGrey")

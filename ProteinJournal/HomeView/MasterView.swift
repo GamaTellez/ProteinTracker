@@ -9,30 +9,41 @@
 import SwiftUI
 
 struct MasterView: View {
-    @State private var iCouldEnabled = true
+//    @State private var iCloudAvailable : Bool = UserDefaults.standard.bool(forKey: Constants.ICloudKeys.isICloudAvailable)
     @State var settingsViewPresented = false
     @State var analyticsViewPresented = false
+    
     @State private var newEntryMenuShouldShow = false
     @State private var manualEntryViewShouldShow = false
+    
     @State private var newEntrySavedSuccesfully = false
-    @State private var proteinCountChanged = false
     @State private var manualEntryViewPresented = false
     @State private var searchEntryViewPresented = false
     @State private var newJournalEntry : ProteinEntry?
     @State private var currentGoal = ProteinGoal(dateCreated: Date(), proteinEntries: [ProteinEntry](), proteinGoal: 259)
+    @ObservedObject var ckController : CKController = CKController()
     
-    init() {
-        
-    }
+    
     var body : some View {
         ZStack {
-            
-            if self.iCouldEnabled {
+            if self.ckController.iCloudStatus == ICloudStatus.checking || self.ckController.iCloudStatus == ICloudStatus.notAvailable {
+                VStack {
+                    ICloudAnimationView(status: self.ckController.iCloudStatus)
+                        .onAppear() {
+                            self.ckController.getUserRecordID { (cloudError) in
+                                guard cloudError != nil else {
+                                    
+                                    return
+                                }
+                            }
+                    }
+                }.frame(minWidth: nil, idealWidth: nil, maxWidth: .infinity, minHeight: nil, idealHeight: nil, maxHeight: .infinity)
+                    .background(Color.backgroundGrey)
+                    .edgesIgnoringSafeArea(.all)
+            } else {
                 VStack {
                     BarMenuView(settingsViewPresented: self.$settingsViewPresented, analyticsViewPresented: self.$analyticsViewPresented)
-                    ZStack {
                         CircleGoalView(proteinCount: 200, proteinGoal: 400)
-                    }
                     Spacer()
                     HStack {
                         CaloriesCircle(width: 110, height: 110, caloriesCount: 240)
@@ -60,12 +71,6 @@ struct MasterView: View {
                 }
                 .frame(minWidth: nil, idealWidth: nil, maxWidth: .infinity, minHeight: nil, idealHeight: nil, maxHeight: .infinity, alignment: .center)
                 .background(Color.backgroundGrey).edgesIgnoringSafeArea(.all)
-            } else {
-                VStack {
-                    Text("Protein Journal needs your iCloud drive to be turned on to store your data. Don't worry though, you can easily delete it at anytime")
-                        .multilineTextAlignment(.center)
-                }.frame(minWidth: nil, idealWidth: nil, maxWidth: .infinity, minHeight: nil, idealHeight: nil, maxHeight: .infinity, alignment: .center)
-                    .background(Color.backgroundGrey).edgesIgnoringSafeArea(.all)
             }
         }
     }
