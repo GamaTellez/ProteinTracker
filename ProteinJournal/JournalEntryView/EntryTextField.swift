@@ -16,11 +16,11 @@ enum TextEntryType {
     var name : String {
         switch self {
         case .name:
-            return "Name:"
+            return "Name"
         case .protein:
-            return "Protein:"
+            return "Protein"
         case .calories:
-            return "Calories:"
+            return "Calories"
         }
     }
 }
@@ -29,7 +29,7 @@ struct EntryTextField : View {
     @Binding var text : String
     private var type : TextEntryType
     
-    private var width : CGFloat!
+    //private var width : CGFloat!
     private var titleText : String!
     private var keyboardType : UIKeyboardType!
     
@@ -41,15 +41,15 @@ struct EntryTextField : View {
         switch self.type {
         case .calories, .protein:
             self.keyboardType = .numberPad
-            self.width = 60
+        //    self.width = 60
         case .name:
             self.keyboardType = .default
-            self.width = 100
+          //  self.width = 200
         }
     }
     
     var body : some View {
-        VStack(alignment: .leading) {
+        VStack {
             Text(self.type.name)
                 .font(AppFonts.title.of(size: 15))
                 .foregroundColor(Color.white)
@@ -61,13 +61,20 @@ struct EntryTextField : View {
                 .background(Color.clear)
                 .foregroundColor(Color.white)
                 .padding(.leading, 10)
-                .frame(width: self.width, height: 0, alignment: .leading)
+                .padding(.trailing, 30)
+                .multilineTextAlignment(.center)
             Rectangle()
-                .frame(width: self.width, height: 1, alignment: .leading)
+                .frame(minWidth: 100, idealWidth: .infinity, maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, minHeight: 1, idealHeight: 1, maxHeight: 1, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                .padding(.leading, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+                .padding(.trailing, /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
                 .foregroundColor(Color.white)
-                .padding(.leading, 5)
+                
         }.frame(minWidth: 100, idealWidth: .infinity, maxWidth: .infinity, minHeight: 50, idealHeight: 50, maxHeight: 50, alignment: .leading)
     }
 }
 
-
+struct EntryTextField_Previews: PreviewProvider {
+    static var previews: some View {
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
+    }
+}

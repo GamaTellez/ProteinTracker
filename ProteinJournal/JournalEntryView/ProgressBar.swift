@@ -10,20 +10,17 @@ import SwiftUI
 
 enum ProgressPortion {
     case none
-    case oneThird
-    case twoThirds
-    case threeThirds
+    case half
+    case whole
     
     var value : Int {
         switch self {
         case .none:
             return 0
-        case .oneThird:
+        case .half:
             return 1
-        case .twoThirds:
+        case .whole:
             return 2
-        case .threeThirds:
-            return 3
         }
     }
 }
@@ -39,7 +36,7 @@ struct ProgressBar : View {
                     .opacity(0.3)
                     .foregroundColor(Color.white)
                 Rectangle()
-                    .frame(width: min((geometry.size.width / 3.0) *  CGFloat(self.progressValue.value), geometry.size.width), height: geometry.size.height)
+                    .frame(width: min((geometry.size.width / 2.0) *  CGFloat(self.progressValue.value), geometry.size.width), height: geometry.size.height)
                     .foregroundColor(Color.appGreen)
                     .animation(.linear)
             }

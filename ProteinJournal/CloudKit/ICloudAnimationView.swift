@@ -30,9 +30,7 @@ struct ICloudAnimationView : View {
     
     var body : some View {
         ZStack {
-            
             if self.status == ICloudStatus.checking {
-                
                 Text(self.status.message)
                     .multilineTextAlignment(.center)
                     .font(AppFonts.title.of(size: 30.00))
@@ -56,39 +54,65 @@ struct ICloudAnimationView : View {
                     .foregroundColor(Color.white)
                 VStack {
                     Image(self.cloudImageName)
-                        .renderingMode(.template)
-                        .foregroundColor(Color.white)
-                        .background(Color.backgroundGrey, alignment: .center)
+                        .background(Color.backgroundGrey.frame(height:10))
                     Spacer()
                         .frame(height:100)
                     Image(Constants.Images.iPhone)
-                        .renderingMode(.template)
-                        .foregroundColor(Color.white)
-                }.background(Color.backgroundGrey.frame(width: 30))
-                
+                        .background(Color.backgroundGrey.frame(width: 30))
+                }.animation(.easeInOut(duration: 1.0))
+                .transition(.opacity)
             }
             
             if self.status == ICloudStatus.notAvailable {
                 VStack {
                     Text("ICloud services off.")
+                        .foregroundColor(.white)
+                        .font(AppFonts.title.of(size: 30))
                     Image(Constants.Images.iCloudOff)
                     Text(self.status.message)
-                }
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .padding(.all, 10)
+                        .lineLimit(nil)
+                        .frame(height:100)
+                    Button(action: {
+                        guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
+                            return
+                        }
+                        if UIApplication.shared.canOpenURL(settingsURL) {
+                            UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+                        } else {
+                            print("Can't open settings")
+                        }
+                    }, label: {
+                        HStack {
+                            Text("Open Settings")
+                            Image("settings")
+                        }
+                    }).padding(.top, 40)
+                }.animation(.easeInOut(duration: 1.0))
+                    .transition(.opacity)
             }
             
             if self.status == ICloudStatus.available {
                 VStack {
                     Text("We are ready to go!")
+                        .foregroundColor(.white)
+                        .font(AppFonts.title.of(size: 30))
                     Image(Constants.Images.iCloudOn)
                     Text(self.status.message)
-                }
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(nil)
+                        .padding(.all, 10)
+                        .frame(height:100)
+                }.animation(.easeInOut(duration: 1.0))
+                    .transition(.opacity)
             }
-            
-            
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 400.00, alignment: .center)
         .edgesIgnoringSafeArea(.all)
-        .background(Color.backgroundGrey)
+        .background(Color.clear)
         .onAppear {
             if self.status == .checking {
                 self.animate.toggle()
@@ -99,6 +123,6 @@ struct ICloudAnimationView : View {
 
 struct ContentViewPreviews: PreviewProvider {
     static var previews: some View {
-        ICloudAnimationView(status: ICloudStatus.available)
+        ICloudAnimationView(status: ICloudStatus.notAvailable)
     }
 }

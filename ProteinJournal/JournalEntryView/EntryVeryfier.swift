@@ -12,38 +12,26 @@ import SwiftUI
 final class EntryVeryfier : ObservableObject {
     
     @Published var portionFilled : ProgressPortion = .none
-    fileprivate var name : String?
+
     fileprivate var protein : Int?
+    
     fileprivate var calories : Int?
 
-    var isEntryNameValid : Bool = false {
-        didSet {
-            withAnimation {
-                self.portionFilled = self.checkFormFilled(validName: self.isEntryNameValid, validProtein: self.isEntryProteinValid, validCalories: self.isEntryCaloriesValid)
-            }
-        }
-    }
     var isEntryProteinValid : Bool = false {
         didSet {
             withAnimation {
-                self.portionFilled = self.checkFormFilled(validName: self.isEntryNameValid, validProtein: self.isEntryProteinValid, validCalories: self.isEntryCaloriesValid)
+                self.portionFilled = self.checkFormFilled(validProtein: self.isEntryProteinValid, validCalories: self.isEntryCaloriesValid)
             }
         }
     }
     var isEntryCaloriesValid : Bool = false {
         didSet {
             withAnimation {
-                self.portionFilled = self.checkFormFilled(validName: self.isEntryNameValid, validProtein: self.isEntryProteinValid, validCalories: self.isEntryCaloriesValid)
+                self.portionFilled = self.checkFormFilled(validProtein: self.isEntryProteinValid, validCalories: self.isEntryCaloriesValid)
             }
         }
     }
-    
-    var entryName : String = "" {
-        didSet {
-            self.isEntryNameValid = self.checkName(name: self.entryName)
-        }
-    }
-    
+        
     var entryProtein : String = "" {
         didSet {
             self.isEntryProteinValid = self.checkProtein(protein:self.entryProtein)
@@ -53,15 +41,6 @@ final class EntryVeryfier : ObservableObject {
     var entryCalories : String = "" {
         didSet {
             self.isEntryCaloriesValid = self.checkCalories(calories:self.entryCalories)
-        }
-    }
-    
-    private func checkName(name:String) -> Bool {
-        if name.trimmingCharacters(in: .whitespaces).isEmpty {
-            return false
-        } else {
-            self.name = name
-            return true
         }
     }
     
@@ -81,35 +60,23 @@ final class EntryVeryfier : ObservableObject {
         return false
     }
     
-    private func checkFormFilled(validName:Bool, validProtein:Bool, validCalories:Bool) -> ProgressPortion {        
-        if validName && !validProtein && !validCalories {
-            return .oneThird
+    private func checkFormFilled(validProtein:Bool, validCalories:Bool) -> ProgressPortion {
+        if validProtein && !validCalories || !validProtein && validCalories {
+            return .half
         }
-        if !validName && validProtein && !validCalories {
-            return .oneThird
+        if !validProtein && !validCalories {
+            return .none
         }
-        if !validName && !validProtein && validCalories {
-            return .oneThird
-        }
-        if validName && validProtein && !validCalories {
-            return .twoThirds
-        }
-        if validName && !validProtein && validCalories {
-            return .twoThirds
-        }
-        if !validName && validProtein && validCalories {
-            return .twoThirds
-        }
-        if validName && validProtein && validCalories {
-            return .threeThirds
+        if validProtein && validCalories {
+            return .whole
         }
         return .none
     }
     
-    internal func saveNewEntry() -> ProteinEntry? {
-        guard let newEntryName = self.name, let newEntryProtein = self.protein, let newEntryCalories = self.calories else {
-            return nil
-        }
-        return ProteinEntry(created: Date(), calories: newEntryCalories, protein: newEntryProtein, name: newEntryName)
-    }
+//    internal func saveNewEntry() -> ProteinEntry? {
+//        guard let newEntryProtein = self.protein, let newEntryCalories = self.calories else {
+//            return nil
+//        }
+//        return ProteinEntry(created: Date(), calories: newEntryCalories, protein: newEntryProtein)
+//    }
 }

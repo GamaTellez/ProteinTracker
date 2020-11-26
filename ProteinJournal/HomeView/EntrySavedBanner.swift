@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct EntrySavedBanner : View {
-    var entry : ProteinEntry
+    //var entry : ProteinEntry
     
     var body : some View {
         VStack {
@@ -21,11 +21,6 @@ struct EntrySavedBanner : View {
                 .padding(5)
                 Spacer()
             }
-            Text("Entry: \(self.entry.name) saved succesfully")
-                .multilineTextAlignment(.leading)
-                .font(Font.custom("StringHelveticaNeue-CondensedBold", size: 13))
-                .foregroundColor(.white)
-                .padding(5)
         }
         .frame(minWidth: 200, idealWidth: .infinity, maxWidth: .infinity, minHeight: 70, idealHeight: nil, maxHeight: 70, alignment: .leading)
         .transition(.asymmetric(insertion: AnyTransition.opacity.combined(with: .slide), removal: .scale))

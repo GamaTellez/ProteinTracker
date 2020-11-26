@@ -55,10 +55,11 @@ struct DayText : View {
 fileprivate struct CaloriesCountLabel : View {
     let calories : Int
     
+    //:completeSettings = none
     var body : some View {
         Text("\(self.calories) Cal.")
             //.font(Font.custom("HelveticaNeue-CondensedBold", size: 30))
-            .font(AppFonts.title.of(size: 30))
+            .font(AppFonts.title.of(size: 25))
             .foregroundColor(Color.foreGroundColor)
             .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
             .scaledToFit()
@@ -86,7 +87,7 @@ struct CaloriesCircle : View {
     }
 }
 
-struct AddEntryButton : View {
+struct AddEntryMenuButton : View {
     let function : () -> Void
     let imageName : String
     let entryMenuShowing : Bool
@@ -97,13 +98,13 @@ struct AddEntryButton : View {
         }, label: {
             Image(self.imageName)
                 .resizable()
+                .renderingMode(.template)
+                .foregroundColor(Color.white)
                 .background(Color.black)
-                .rotationEffect(.degrees(self.entryMenuShowing ? 180 : 0))
+                .rotationEffect(.degrees(self.entryMenuShowing ? -180 : 0))
                 .animation(Animation.spring())
-        })
-            .frame(width: 80, height: 80, alignment: .trailing)
-            .mask(Circle())
-            .padding(.trailing, 20)
-            .foregroundColor(Color.foreGroundColor)
+        }).frame(width: 80, height: 80, alignment: .trailing)
+        .mask(Circle())
+        .padding(.trailing, 20)
     }
 }

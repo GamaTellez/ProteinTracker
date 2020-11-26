@@ -10,14 +10,14 @@ import Foundation
 
 final class ProteinEntry {
     private(set) var dateCreated : Date
-    private(set) var calories : Int
-    private(set) var protein : Int
-    private(set) var name : String
     
-    init(created:Date, calories:Int, protein: Int, name:String ) {
+    private(set) var calories : Int
+    
+    private(set) var protein : Int
+    
+    init(created:Date, calories:Int, protein: Int) {
         self.dateCreated = created
         self.calories = calories
         self.protein = protein
-        self.name = name
     }
 }

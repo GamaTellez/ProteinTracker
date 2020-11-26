@@ -12,8 +12,9 @@ struct SettingsView : View {
     
     let appSettings: [Setting] = [Setting(title: "New day", imageName: "newDay", description: "Start a new day"),
                                   Setting(title: "New Goal", imageName: "goal", description: "Set a new protein goal")]
-    let icloudSettings: [Setting] = [Setting(title: "Clear Data", imageName: "clear", description: "Clear all data stored in iCloud"),Setting(title: "Logout", imageName: "logout", description: "Logout from your iCloud")]
-    var body : some View {
+    let localStorage: [Setting] = [Setting(title: "Clear Data", imageName: "clear", description: "Clear all data stored in Device")]
+ 
+   var body : some View {
         VStack {
             HStack {
                 Button(action: { self.dismissVC() }) {
@@ -37,8 +38,8 @@ struct SettingsView : View {
                         SettingRow(setting: appSetting)
                         }
                 }
-                Section(header:Text("iCloud")) {
-                    ForEach(self.icloudSettings) { iCloudSetting in
+                Section(header:Text("Local Storage")) {
+                    ForEach(self.localStorage) { iCloudSetting in
                     SettingRow(setting: iCloudSetting)
                     }
                 }

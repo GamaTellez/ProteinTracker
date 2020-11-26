@@ -7,81 +7,145 @@
 //
 
 import SwiftUI
+import CoreData
+
+enum NewEntryStatus {
+    case notSaved, saving, saved, savedFailed
+}
 
 struct ManualEntryView : View {
     
     @ObservedObject private var entryVeryfier : EntryVeryfier = EntryVeryfier()
-    //@Binding var isViewShowing : Bool
-//    @Binding var newJournalEntry : ProteinEntry?
-//    @Binding var newEntrySavedSuccessfully : Bool
-//    @State private var showActivityView = false
+    
+    @State private var savedSuccessfully = false
+    
+    @State private var entryStatus : NewEntryStatus = .notSaved
+    
+    @State private var animating = false
+    
+    private var width : CGFloat
+    
+    var showing : Binding<Bool>
+    
+    init(minWidth: CGFloat, showing:Binding<Bool>) {
+        self.width = minWidth
+        self.showing = showing
+    }
     
     var body : some View {
-        VStack(alignment: .leading) {
+        VStack (alignment: .center) {
+            VStack (spacing: 0){
+                
+                HStack {
+                    Button(action: {
+                        self.dismissButtonTapped()
+                    }) {
+                        Image("dismiss")
+                            .renderingMode(.template)
+                            .foregroundColor(self.entryStatus == NewEntryStatus.saving ? Color.gray : Color.white)
+                    }
+                    .padding(.trailing, 5)
+                    .padding(.leading,5)
+                    .disabled((self.entryStatus == NewEntryStatus.saving))
+                    
+                    Text("New Entry")
+                        .foregroundColor(Color.foreGroundColor)
+                        .font(AppFonts.title.of(size: 20))
+                    
+                    Spacer()
+                }
+                .frame(minWidth: nil, idealWidth: nil, maxWidth: .infinity, minHeight: 40, idealHeight: nil, maxHeight: 40, alignment: .center)
+                .background(Color.black)
+                
+                HStack {
+                    ProgressBar(progressValue: self.$entryVeryfier.portionFilled)
+                        .frame(height: 2)
+                        .padding(.top, 0)
+                }
+            }
+            
             HStack {
-                Button(action: { }) {
-                    Image("dismiss").foregroundColor(Color.white)
+                if self.entryStatus == .notSaved {
+                    EntryTextField(text: self.$entryVeryfier.entryProtein, type: .protein)
+                        .padding(.top, 5)
+                    EntryTextField(text: self.$entryVeryfier.entryCalories, type: .calories)
+                        .padding(.top, 5)
                 }
-                .padding(.trailing, 5)
-                Text("New Entry")
-                .foregroundColor(Color.foreGroundColor)
-                .font(AppFonts.title.of(size: 20))
-                Spacer()
-                if self.entryVeryfier.portionFilled == ProgressPortion.threeThirds {
-                    SaveEntryButton(saveAction: self.saveButtonTapped)
+                if self.entryStatus == .saving {
+                    AnimationImageView(width: self.width)
                 }
-            }
-            .frame(minWidth: nil, idealWidth: nil, maxWidth: .infinity, minHeight: 50, idealHeight: nil, maxHeight: 50, alignment: .leading)
-            .background(Color.black)
-            .padding(.top, 32)
-            ProgressBar(progressValue: self.$entryVeryfier.portionFilled).frame(height:20)
-            VStack(alignment: .leading) {
-                EntryTextField(text: self.$entryVeryfier.entryName, type: .name)
-                EntryTextField(text: self.$entryVeryfier.entryProtein, type: .protein)
-                EntryTextField(text: self.$entryVeryfier.entryCalories, type: .calories)
-            }
-            Spacer()
+                if self.entryStatus == .saved {
+                    Image("done")
+                        .renderingMode(.template)
+                        .foregroundColor(.appGreen)
+                        .transition(.scale)
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                withAnimation {
+                                    self.showing.wrappedValue.toggle()
+                                }
+                            }
+                        }
+                }
+            }.frame(width: self.width, height:150, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+            
+            Button(action: { self.saveButtonTapped() }
+                   , label: {
+                    HStack {
+                        Text(self.entryStatus == NewEntryStatus.notSaved ? "Save" : (self.entryStatus == NewEntryStatus.saving ? "Saving..." : "Saved"))
+                            .foregroundColor( self.entryVeryfier.portionFilled == .whole ? .white : .gray )
+                            .font(AppFonts.title.of(size: 20))
+                            .transition(.opacity)
+                        if self.entryStatus == .notSaved {
+                            Image("save").renderingMode(.template)
+                                .foregroundColor(self.entryVeryfier.portionFilled == .whole ? Color.white : Color.gray)
+                                .transition(.opacity)
+                        }
+                    }
+                   })
+                .frame(width:150, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                .border(self.entryVeryfier.portionFilled == .whole ? Color.white : Color.gray, width: 0.5)
+                .disabled(!(self.entryVeryfier.portionFilled == .whole))
+                .padding(.bottom, 20)
+            
         }
-        .frame(minWidth: nil, idealWidth: nil, maxWidth: .infinity, minHeight: nil, idealHeight: nil, maxHeight: .infinity, alignment: .leading)
+        .frame(minWidth: self.width, idealWidth: self.width, maxWidth: self.width, minHeight: 250, idealHeight: nil, maxHeight: 250, alignment: .top)
         .background(Color.backgroundGrey).edgesIgnoringSafeArea(.all)
-//        .onDisappear {
-//            self.savedBannerShouldShow()
-//        }
+        .border(Color.white, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+        .transition(AnyTransition.move(edge: .leading).combined(with: .opacity))
     }
     
-    private func savedBannerShouldShow() {
-//        if self.newJournalEntry != nil {
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-//                withAnimation {
-//                    self.newEntrySavedSuccessfully.toggle()
-//                }
-//            }
-//        }
-    }
-    
-    private func cancelButtonTapped() {
+    //AMRK: dissmiss button tapepd
+    private func dismissButtonTapped() {
         withAnimation {
-          //  self.isViewShowing.toggle()
+            self.showing.wrappedValue.toggle()
         }
     }
     
+    //MARK: save button tapped
     private func saveButtonTapped() {
-//        self.showActivityView.toggle()
-//        if let newJournalEntry = self.entryChecker.saveNewEntry() {
-//            self.newJournalEntry = newJournalEntry
-//            
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {//removew when actually saving to icloud
-//                withAnimation {
-//                    self.isViewShowing.toggle()
-//                }
-//            }
-//        }
+        withAnimation {
+            self.entryStatus = .saving
+            DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
+                withAnimation {
+                    self.entryStatus = .saved
+                }
+            }
+        }
     }
 }
 
-struct ManualEntryPreview: PreviewProvider {
+
+struct WrappingView : View {
+    @State var something = false
+    var body: some View {
+        ManualEntryView(minWidth: 370, showing: self.$something)
+    }
+}
+
+struct ManualEntryViewPreview: PreviewProvider {
     static var previews: some View {
-        ManualEntryView()
+        WrappingView()
     }
 }
 

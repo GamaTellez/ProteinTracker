@@ -28,6 +28,6 @@ struct BarMenuView : View {
         }
         .frame(minWidth: nil, idealWidth: nil, maxWidth: .infinity, minHeight: 50, idealHeight: nil, maxHeight: 50, alignment: .leading)
         .background(Color.black)
-        .padding(.top, 38)
+        .padding(.top, 43)
     }
 }

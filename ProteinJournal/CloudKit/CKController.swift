@@ -35,7 +35,7 @@ enum ICloudStatus {
         case .available:
             return "You can always delete Protein's Journal Data in settings"
         case .notAvailable:
-            return "Protein Journal uses your iCloud to save your data, you can delete it at anytime"
+            return "Protein Journal uses your iCloud to save your progress, please sign in into your iCloud and try again (you can delete it at anytime"
         case .checking:
             return "Checking iCloud services"
         }
@@ -45,33 +45,27 @@ enum ICloudStatus {
 
 final class CKController : ObservableObject {
     
-    @Published private(set) var iCloudStatus = ICloudStatus.notAvailable
+    @Published private(set) var status = ICloudStatus.notAvailable
+    private var recordID : CKRecord.ID?
     
     init() {
-        let isICloudAvailable = UserDefaults.standard.bool(forKey: Constants.ICloudKeys.isICloudAvailable)
-        if isICloudAvailable {
-            self.iCloudStatus = .available
+        if UserDefaults.standard.bool(forKey: Constants.ICloudKeys.isICloudAvailable) {
+            self.status = .available
         } else {
-            self.iCloudStatus = .checking
+            self.status = .checking
         }
     }
     
-    private var recordID : CKRecord.ID?
-    
-    internal func getUserRecordID(completion: @escaping (ICloudError?)-> Void) {
+    internal func getUserRecordID() {
         let defaultContainer = CKContainer.default()
         defaultContainer.fetchUserRecordID { (recordID, error) in
             if let responseError = error {
                 print(responseError.localizedDescription)
-                self.iCloudStatus = .notAvailable
-                completion(ICloudError.ICloudNotEnabled)
+                self.updateStatus(newStatus: .notAvailable)
             } else if let userRecordID = recordID {
-                DispatchQueue.main.sync {
-                    self.recordID = userRecordID
-                    self.iCloudStatus = .available
-                    print(userRecordID)
-                    completion(nil)
-                }
+                print(userRecordID)
+                self.recordID = userRecordID
+                self.updateStatus(newStatus: .available)
             }
         }
     }
@@ -84,6 +78,16 @@ final class CKController : ObservableObject {
                 print(responseError.localizedDescription)
             } else if let userRecord = record {
                 print(userRecord)
+            }
+        }
+    }
+    
+    private func updateStatus(newStatus: ICloudStatus) {
+        DispatchQueue.main.async {
+            Timer.scheduledTimer(withTimeInterval: 4, repeats: false) { (timer) in
+                    withAnimation {
+                        self.status = newStatus
+                    }
             }
         }
     }
