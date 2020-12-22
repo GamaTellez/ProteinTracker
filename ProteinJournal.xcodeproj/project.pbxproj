@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8730AE0724549B1C00A47A9D /* EntryVeryfier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8730AE0524549AF500A47A9D /* EntryVeryfier.swift */; };
+		8733696F25770F610058B330 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733696E25770F610058B330 /* SplashView.swift */; };
+		873369772577F0C90058B330 /* DayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873369762577F0C90058B330 /* DayHelper.swift */; };
 		8733912F244E2A7000434489 /* EntryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733912E244E2A7000434489 /* EntryTextField.swift */; };
 		87467AA3243EE1DF00B03ED4 /* Extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87467AA2243EE1DF00B03ED4 /* Extenstions.swift */; };
 		87482402256C8744008CAB2D /* AnimationImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87482401256C8744008CAB2D /* AnimationImageView.swift */; };
@@ -26,9 +28,9 @@
 		876C26DE2438EC84006DD63B /* ProteinJournalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C26DD2438EC84006DD63B /* ProteinJournalTests.swift */; };
 		876C26E92438EC84006DD63B /* ProteinJournalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C26E82438EC84006DD63B /* ProteinJournalUITests.swift */; };
 		876D7621245748940013E8AA /* EntrySavedBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876D7620245748940013E8AA /* EntrySavedBanner.swift */; };
-		8773233E256DEC5400FB16A2 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8773233C256DEC5400FB16A2 /* Model.xcdatamodeld */; };
 		8773234F256DF21000FB16A2 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8773234E256DF21000FB16A2 /* CoreDataController.swift */; };
 		87784F342530E41600620406 /* SavedAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87784F332530E41600620406 /* SavedAnimation.swift */; };
+		879BE7D1258AE8D60062B6BC /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 879BE7CF258AE8D60062B6BC /* Model.xcdatamodeld */; };
 		87C7518E24AAB2EE00B426F8 /* CKController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C7518D24AAB2EE00B426F8 /* CKController.swift */; };
 		87DE57DB24A174D700C3C6FA /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DE57DA24A174D700C3C6FA /* ProgressBar.swift */; };
 		87E16DF12448B52F00DFF2A3 /* PersonalizedViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E16DF02448B52F00DFF2A3 /* PersonalizedViews.swift */; };
@@ -55,6 +57,8 @@
 
 /* Begin PBXFileReference section */
 		8730AE0524549AF500A47A9D /* EntryVeryfier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryVeryfier.swift; sourceTree = "<group>"; };
+		8733696E25770F610058B330 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		873369762577F0C90058B330 /* DayHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayHelper.swift; sourceTree = "<group>"; };
 		8733912E244E2A7000434489 /* EntryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryTextField.swift; sourceTree = "<group>"; };
 		87467AA2243EE1DF00B03ED4 /* Extenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extenstions.swift; sourceTree = "<group>"; };
 		87482401256C8744008CAB2D /* AnimationImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationImageView.swift; sourceTree = "<group>"; };
@@ -80,9 +84,9 @@
 		876C26E82438EC84006DD63B /* ProteinJournalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProteinJournalUITests.swift; sourceTree = "<group>"; };
 		876C26EA2438EC84006DD63B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		876D7620245748940013E8AA /* EntrySavedBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntrySavedBanner.swift; sourceTree = "<group>"; };
-		8773233D256DEC5400FB16A2 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		8773234E256DF21000FB16A2 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		87784F332530E41600620406 /* SavedAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedAnimation.swift; sourceTree = "<group>"; };
+		879BE7D0258AE8D60062B6BC /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		87C7518D24AAB2EE00B426F8 /* CKController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKController.swift; sourceTree = "<group>"; };
 		87DE57DA24A174D700C3C6FA /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		87E16DF02448B52F00DFF2A3 /* PersonalizedViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizedViews.swift; sourceTree = "<group>"; };
@@ -131,6 +135,7 @@
 		8739FBED243CF892002457F3 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
+				8733696E25770F610058B330 /* SplashView.swift */,
 				876C26CA2438EC83006DD63B /* MasterView.swift */,
 				8757332324621F7C00AA587E /* BarMenuView.swift */,
 				8757332124621EF800AA587E /* CircleGoalView.swift */,
@@ -238,8 +243,9 @@
 		87B0040C244E1D4200956245 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
-				8773233C256DEC5400FB16A2 /* Model.xcdatamodeld */,
+				879BE7CF258AE8D60062B6BC /* Model.xcdatamodeld */,
 				8773234E256DF21000FB16A2 /* CoreDataController.swift */,
+				873369762577F0C90058B330 /* DayHelper.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -376,6 +382,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				87467AA3243EE1DF00B03ED4 /* Extenstions.swift in Sources */,
+				879BE7D1258AE8D60062B6BC /* Model.xcdatamodeld in Sources */,
+				8733696F25770F610058B330 /* SplashView.swift in Sources */,
 				87E16DF12448B52F00DFF2A3 /* PersonalizedViews.swift in Sources */,
 				87C7518E24AAB2EE00B426F8 /* CKController.swift in Sources */,
 				8754FCD824B3C6DF0020612C /* ICloudAnimationView.swift in Sources */,
@@ -383,7 +391,6 @@
 				8733912F244E2A7000434489 /* EntryTextField.swift in Sources */,
 				876C26C92438EC83006DD63B /* SceneDelegate.swift in Sources */,
 				87784F342530E41600620406 /* SavedAnimation.swift in Sources */,
-				8773233E256DEC5400FB16A2 /* Model.xcdatamodeld in Sources */,
 				876C26CB2438EC83006DD63B /* MasterView.swift in Sources */,
 				8757332224621EF800AA587E /* CircleGoalView.swift in Sources */,
 				876A3AC72446258D00D0471E /* SettingsView.swift in Sources */,
@@ -392,6 +399,7 @@
 				8730AE0724549B1C00A47A9D /* EntryVeryfier.swift in Sources */,
 				8757332424621F7C00AA587E /* BarMenuView.swift in Sources */,
 				87E16DF52448D1D700DFF2A3 /* AddEntryMenuView.swift in Sources */,
+				873369772577F0C90058B330 /* DayHelper.swift in Sources */,
 				876D7621245748940013E8AA /* EntrySavedBanner.swift in Sources */,
 				874CFAD524464283003A273D /* SettingRow.swift in Sources */,
 				87DE57DB24A174D700C3C6FA /* ProgressBar.swift in Sources */,
@@ -726,13 +734,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		8773233C256DEC5400FB16A2 /* Model.xcdatamodeld */ = {
+		879BE7CF258AE8D60062B6BC /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				8773233D256DEC5400FB16A2 /* Model.xcdatamodel */,
+				879BE7D0258AE8D60062B6BC /* Model.xcdatamodel */,
 			);
-			currentVersion = 8773233D256DEC5400FB16A2 /* Model.xcdatamodel */;
-			path = Model.xcdatamodeld;
+			currentVersion = 879BE7D0258AE8D60062B6BC /* Model.xcdatamodel */;
+			name = Model.xcdatamodeld;
+			path = ../../Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

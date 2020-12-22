@@ -7,32 +7,42 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct MasterView: View {
+    
+    var currentDayID : NSManagedObjectID?
+    
+    var coreDataController : CoreDataController
+    
     @State private var settingsViewPresented = false
     
     @State private var analyticsViewPresented = false
     
     @State private var addEntryMenuViewShowing = false
     
-    @State private var entrySavedSuccesfully = false
-    
     @State private var manualEntryViewShowing = false
     
     @State private var searchEntryViewPresented = false
     
-    //@State private var currentGoal = ProteinGoal(dateCreated: Date(), proteinEntries: [ProteinEntry](), proteinGoal: 259)
+    @State private var dayDate = ""
     
     var body : some View {
         
         GeometryReader { geometry in
-            
             ZStack {
                 VStack (alignment: .center) {
-                    BarMenuView(settingsViewPresented: self.$settingsViewPresented, analyticsViewPresented: self.$analyticsViewPresented)
+                    BarMenuView(settingsViewPresented: self.$settingsViewPresented,
+                                analyticsViewPresented: self.$analyticsViewPresented,
+                                dayDate: self.$dayDate,
+                                dayFunction: {
+                                    self.dayButtonPressed()
+                                })
                     HStack(alignment: .top) {
                         if self.manualEntryViewShowing {
-                            ManualEntryView(minWidth: geometry.size.width,showing: self.$manualEntryViewShowing)
+                            ManualEntryView(minWidth: geometry.size.width,
+                                            showing: self.$manualEntryViewShowing,
+                                            coreDataController: self.coreDataController)
                             Spacer()
                         }
                         Spacer()
@@ -50,9 +60,6 @@ struct MasterView: View {
                     Spacer()
                     ZStack {
                         HStack {
-                            if self.entrySavedSuccesfully {
-//                                self.showEntrySavedNotificationBanner()
-                            }
                             Spacer()
                             AddEntryMenuButton(function: {
                                 withAnimation {
@@ -63,35 +70,40 @@ struct MasterView: View {
                     }
                     Spacer()
                 }
-                .frame(minWidth: nil, idealWidth: nil, maxWidth: .infinity, minHeight: nil, idealHeight: nil, maxHeight: .infinity, alignment: .center)
+                .frame(minWidth: nil,
+                       idealWidth: nil,
+                       maxWidth: .infinity,
+                       minHeight: nil,
+                       idealHeight: nil,
+                       maxHeight: .infinity,
+                       alignment: .center)
                 .background(Color.backgroundGrey).edgesIgnoringSafeArea(.all)
             }
-        }
-    }
-    
-    func newEntrySaved(successfully: Bool) {
-        if successfully {
-            withAnimation {
-                self.entrySavedSuccesfully.toggle()
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
+                Day.saveDay()
+            }
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+                if Day.isNewDay() {
+                    print("it is a new day")
+                }
+            }.onAppear {
+                guard let dayID = self.currentDayID,
+                      let currentDay = self.coreDataController.getObject(entity: Day.self, objID: dayID) else {
+                    return
+                }
+                self.dayDate = currentDay.readableDate() ?? "Tap to start a new day"
             }
         }
     }
     
-//    private func showEntrySavedNotificationBanner() -> some View {
-//        return EntrySavedBanner(entry: ProteinEntry(created: Date(), calories: 300, protein: 23))
-//            .onAppear {
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-//                    withAnimation {
-//                        self.entrySavedSuccesfully.toggle()
-//                    }
-//                }
-//            }
-//    }
+    internal func dayButtonPressed() {
+        
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        MasterView()
+        MasterView(currentDayID: NSManagedObjectID(), coreDataController: CoreDataController())
     }
 }
 

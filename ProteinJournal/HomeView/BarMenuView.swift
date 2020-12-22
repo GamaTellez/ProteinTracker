@@ -9,8 +9,14 @@
 import SwiftUI
 
 struct BarMenuView : View {
+
     @Binding var settingsViewPresented : Bool
+    
     @Binding var analyticsViewPresented : Bool
+    
+    @Binding var dayDate : String
+    
+    let dayFunction : () -> Void
     
     var body : some View {
         HStack {
@@ -18,10 +24,13 @@ struct BarMenuView : View {
                 self.settingsViewPresented.toggle()
                 
             }, side: .leading, paddingSize: 10)
-            .sheet(isPresented: $settingsViewPresented) { SettingsView()
-            }
+            .sheet(isPresented: $settingsViewPresented) { SettingsView() }
             Spacer()
-            DayText(text:"Monday March 20th")
+            Button(action: {
+                    self.dayFunction()
+                }, label: {
+                    DayText(text: self.dayDate)
+                })
             Spacer()
             BarButton(imageName: "analytics", function: { self.analyticsViewPresented.toggle()
             }, side: .trailing, paddingSize: 10)

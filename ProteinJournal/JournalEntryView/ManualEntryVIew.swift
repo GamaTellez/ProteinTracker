@@ -7,13 +7,14 @@
 //
 
 import SwiftUI
-import CoreData
 
 enum NewEntryStatus {
     case notSaved, saving, saved, savedFailed
 }
 
 struct ManualEntryView : View {
+    
+    var coreDataController : CoreDataController
     
     @ObservedObject private var entryVeryfier : EntryVeryfier = EntryVeryfier()
     
@@ -22,14 +23,16 @@ struct ManualEntryView : View {
     @State private var entryStatus : NewEntryStatus = .notSaved
     
     @State private var animating = false
+ 
     
     private var width : CGFloat
     
     var showing : Binding<Bool>
     
-    init(minWidth: CGFloat, showing:Binding<Bool>) {
+    init(minWidth: CGFloat, showing:Binding<Bool>, coreDataController: CoreDataController) {
         self.width = minWidth
         self.showing = showing
+        self.coreDataController = coreDataController
     }
     
     var body : some View {
@@ -125,12 +128,17 @@ struct ManualEntryView : View {
     //MARK: save button tapped
     private func saveButtonTapped() {
         withAnimation {
+            
             self.entryStatus = .saving
-            DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
-                withAnimation {
-                    self.entryStatus = .saved
-                }
-            }
+//            self.coreDataController.createProteinEntry(calories: self.entryVeryfier.calories,
+//                                                       protein: self.entryVeryfier.protein) { (saved) in
+//                if saved {
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//                        self.showing.wrappedValue.toggle()
+//                    }
+//                }
+//            }
+        
         }
     }
 }
@@ -139,7 +147,7 @@ struct ManualEntryView : View {
 struct WrappingView : View {
     @State var something = false
     var body: some View {
-        ManualEntryView(minWidth: 370, showing: self.$something)
+        ManualEntryView(minWidth: 370, showing: self.$something, coreDataController: CoreDataController())
     }
 }
 

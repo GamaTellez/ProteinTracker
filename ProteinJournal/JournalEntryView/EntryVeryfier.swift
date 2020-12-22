@@ -13,9 +13,9 @@ final class EntryVeryfier : ObservableObject {
     
     @Published var portionFilled : ProgressPortion = .none
 
-    fileprivate var protein : Int?
+    internal var protein : Int = 0
     
-    fileprivate var calories : Int?
+    internal var calories : Int = 0
 
     var isEntryProteinValid : Bool = false {
         didSet {
