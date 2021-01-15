@@ -14,17 +14,9 @@ enum AppeEntities {
     case proteinGoal, day, entry
 }
 
-final class CoreDataController {
+final class CoreDataController : ObservableObject {
     
-    //    private var currentDayId : NSManagedObjectID? {
-    //        set {
-    //
-    //        }
-    //        get {
-    //
-    //        }
-    //    }
-    
+    @Published private(set) var currentDay : Day?
     
     private var persistantContainer: NSPersistentContainer = {
         
@@ -43,17 +35,11 @@ final class CoreDataController {
     
     init() {
         self.context = self.persistantContainer.newBackgroundContext()
+        self.currentDay = self.getCurrentDay()
     }
     
     internal func createProteinEntry(calories: Int, protein: Int, completion: @escaping (Bool)-> Void) {
-        //        self.persistantContainer.performBackgroundTask { (backGroundContext) in
-        //            let newEntry = ProteinEntry(context: backGroundContext)
-        //            newEntry.protein = Int16(protein)
-        //            newEntry.calories = Int16(calories)
-        //            newEntry.date = Date()
-        //
-        //            completion(try! backGroundContext.saveIfNeeded())
-        //        }
+        
         self.context.perform {
             let newEntry = ProteinEntry(context: self.context)
             newEntry.protein = Int16(protein)
@@ -64,33 +50,32 @@ final class CoreDataController {
         }
     }
     
-    internal func createDay( proteinGoal: Int?, completion: @escaping (NSManagedObjectID?)  -> Void) {
+    internal func createDay( proteinGoal: Int?, completion: @escaping (_ saved : Bool)  -> Void) {
         self.context.perform {
             let newDay = Day(context: self.context)
             newDay.date = Date()
             newDay.proteinGoal = Int16(proteinGoal ?? 0)
             
             if try! self.context.saveIfNeeded() {
-                completion(newDay.objectID)
+                self.currentDay = newDay
+                completion(true)
             } else {
-                completion(nil)
-            }
+                self.currentDay = nil
+                completion(false)
+            }            
         }
     }
     
-    internal func getCurrentDayID() -> NSManagedObjectID? {
+    private func getCurrentDay() -> Day? {
         let dateSortDescriptor = NSSortDescriptor(key: "date", ascending: true)
         guard let days = try? self.context.fetchObjects(entity: Day.self,
                                                    sortBy: [dateSortDescriptor],
                                                    predicate: nil),
               !days.isEmpty else { return nil }
-        return days[0].objectID
-    }
-    
-    internal func getObject<T:NSManagedObject> (entity: T.Type, objID: NSManagedObjectID) -> T? {
-        return try? self.context.existingObject(with: objID) as? T
+        return days[0]
     }
 }
+
 
 extension NSManagedObject {
     class func entityName() -> String {
@@ -123,3 +108,6 @@ extension NSManagedObjectContext {
         return try self.fetch(request)
     }
 }
+
+
+
