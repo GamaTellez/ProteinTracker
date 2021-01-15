@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="20B29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20C69" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Day" representedClassName="Day" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="proteinGoal" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="entries" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProteinEntry" inverseName="day" inverseEntity="ProteinEntry"/>
+        <relationship name="entries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ProteinEntry" inverseName="day" inverseEntity="ProteinEntry"/>
     </entity>
     <entity name="ProteinEntry" representedClassName="ProteinEntry" syncable="YES" codeGenerationType="class">
         <attribute name="calories" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -12,7 +12,7 @@
         <relationship name="day" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Day" inverseName="entries" inverseEntity="Day"/>
     </entity>
     <elements>
-        <element name="Day" positionX="-45" positionY="0" width="128" height="74"/>
-        <element name="ProteinEntry" positionX="-18" positionY="45" width="128" height="89"/>
+        <element name="Day" positionX="-613.7218017578125" positionY="-282.5452880859375" width="128" height="88"/>
+        <element name="ProteinEntry" positionX="-18" positionY="45" width="128" height="103"/>
     </elements>
 </model>

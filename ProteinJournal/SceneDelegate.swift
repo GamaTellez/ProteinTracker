@@ -24,7 +24,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let cdController = CoreDataController()
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: MasterView(currentDayID: cdController.getCurrentDayID(), coreDataController:  cdController))
+//            window.rootViewController = UIHostingController(rootView: MasterView(currentDayID: cdController.getCurrentDayID(), coreDataController:  cdController))
+            window.rootViewController = UIHostingController(rootView: MasterView(coreDataController: cdController))
             self.window = window
             window.makeKeyAndVisible()
         }
