@@ -14,8 +14,6 @@ enum NewEntryStatus {
 
 struct ManualEntryView : View {
     
-    var coreDataController : CoreDataController
-    
     @ObservedObject private var entryVeryfier : EntryVeryfier = EntryVeryfier()
     
     @State private var savedSuccessfully = false
@@ -23,11 +21,16 @@ struct ManualEntryView : View {
     @State private var entryStatus : NewEntryStatus = .notSaved
     
     @State private var animating = false
- 
+    
+//    private(set) var currentDay : Day
+    
+    private(set) var coreDataController : CoreDataController
+    
+    private(set) var showing : Binding<Bool>
     
     private var width : CGFloat
     
-    var showing : Binding<Bool>
+    
     
     init(minWidth: CGFloat, showing:Binding<Bool>, coreDataController: CoreDataController) {
         self.width = minWidth
@@ -39,26 +42,26 @@ struct ManualEntryView : View {
         VStack (alignment: .center) {
             VStack (spacing: 0){
                 
-                HStack {
+                HStack (alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                {
+                    
                     Button(action: {
-                        self.dismissButtonTapped()
+                        withAnimation {
+                            self.showing.wrappedValue.toggle()
+                        }
                     }) {
                         Image("dismiss")
                             .renderingMode(.template)
                             .foregroundColor(self.entryStatus == NewEntryStatus.saving ? Color.gray : Color.white)
                     }
-                    .padding(.trailing, 5)
-                    .padding(.leading,5)
-                    .disabled((self.entryStatus == NewEntryStatus.saving))
                     
+    
                     Text("New Entry")
                         .foregroundColor(Color.foreGroundColor)
-                        .font(AppFonts.title.of(size: 20))
-                    
+                        .font(AppFonts.title.of(size: 30))
                     Spacer()
                 }
                 .frame(minWidth: nil, idealWidth: nil, maxWidth: .infinity, minHeight: 40, idealHeight: nil, maxHeight: 40, alignment: .center)
-                .background(Color.black)
                 
                 HStack {
                     ProgressBar(progressValue: self.$entryVeryfier.portionFilled)
@@ -114,15 +117,7 @@ struct ManualEntryView : View {
         }
         .frame(minWidth: self.width, idealWidth: self.width, maxWidth: self.width, minHeight: 250, idealHeight: nil, maxHeight: 250, alignment: .top)
         .background(Color.backgroundGrey).edgesIgnoringSafeArea(.all)
-        .border(Color.white, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
         .transition(AnyTransition.move(edge: .leading).combined(with: .opacity))
-    }
-    
-    //AMRK: dissmiss button tapepd
-    private func dismissButtonTapped() {
-        withAnimation {
-            self.showing.wrappedValue.toggle()
-        }
     }
     
     //MARK: save button tapped
@@ -130,15 +125,15 @@ struct ManualEntryView : View {
         withAnimation {
             
             self.entryStatus = .saving
-//            self.coreDataController.createProteinEntry(calories: self.entryVeryfier.calories,
-//                                                       protein: self.entryVeryfier.protein) { (saved) in
-//                if saved {
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                        self.showing.wrappedValue.toggle()
-//                    }
-//                }
-//            }
-        
+            //            self.coreDataController.createProteinEntry(calories: self.entryVeryfier.calories,
+            //                                                       protein: self.entryVeryfier.protein) { (saved) in
+            //                if saved {
+            //                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            //                        self.showing.wrappedValue.toggle()
+            //                    }
+            //                }
+            //            }
+            
         }
     }
 }
