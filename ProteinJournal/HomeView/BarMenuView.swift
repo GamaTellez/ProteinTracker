@@ -14,7 +14,7 @@ struct BarMenuView : View {
     
     @Binding var analyticsViewPresented : Bool
     
-    @Binding var dayDate : String
+    var dayDate : Date?
     
     let dayFunction : () -> Void
     
@@ -29,13 +29,13 @@ struct BarMenuView : View {
             Button(action: {
                     self.dayFunction()
                 }, label: {
-                    DayText(text: self.dayDate)
+                    DayText(text: Date.formattedDate(from: self.dayDate) ?? "Start a new day")
                 })
             Spacer()
             BarButton(imageName: "analytics", function: { self.analyticsViewPresented.toggle()
             }, side: .trailing, paddingSize: 10)
         }
-        .frame(minWidth: nil, idealWidth: nil, maxWidth: .infinity, minHeight: 50, idealHeight: nil, maxHeight: 50, alignment: .leading)
+        .frame(minWidth: nil, idealWidth: nil, maxWidth: .infinity, minHeight: 70, idealHeight: nil, maxHeight: 70, alignment: .leading)
         .background(Color.black)
         .padding(.top, 43)
     }
