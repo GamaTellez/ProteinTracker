@@ -14,18 +14,22 @@ fileprivate enum DayEntityKeys {
 }
 
 extension Day {
-    func readableDate() -> String? {
-        guard let dayDate = self.date else { return nil }
-        return Calendar.current.dateComponents([.day], from: dayDate).description
-    }
     
     static func saveDay() {
         UserDefaults.standard.set(Date(), forKey: DayEntityKeys.lastDay.key)
     }
     
     static func isNewDay() -> Bool {
-        
         guard let lastDay = UserDefaults.standard.object(forKey: DayEntityKeys.lastDay.key) as? Date else { return false }
         return Calendar.current.isDate(Date(), inSameDayAs: lastDay)
+    }
+}
+
+extension Date {
+    static func formattedDate(from date: Date?) -> String? {
+        guard let dayDate = date else { return nil }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE, MMM d, yyyy"
+        return formatter.string(from: dayDate)
     }
 }
